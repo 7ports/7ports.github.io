@@ -230,7 +230,6 @@
       overflow: hidden;
     }
 
-    /* Top bar: name, type, links */
     .project-header {
       padding: 28px 32px 22px;
       border-bottom: 1px solid var(--border);
@@ -342,35 +341,9 @@
       width: 100%;
       height: auto;
       display: block;
-      image-rendering: pixelated; /* crisp for pixel art */
+      image-rendering: pixelated;
     }
 
-    /* Placeholder frames for projects without screenshots yet */
-    .media-placeholder {
-      aspect-ratio: 16/9;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: rgba(255,255,255,0.025);
-      border-radius: var(--radius-sm);
-      border: 1px dashed rgba(255,255,255,0.1);
-      color: var(--text-faint);
-      font-size: 13px;
-    }
-
-    .media-placeholder .ph-icon {
-      font-size: 28px;
-      opacity: 0.4;
-    }
-
-    .media-placeholder span {
-      font-size: 12px;
-      color: var(--text-faint);
-    }
-
-    /* Terminal / code preview */
     .terminal-preview {
       border-radius: var(--radius-sm);
       border: 1px solid var(--border-med);
@@ -414,18 +387,12 @@
     .terminal-body .blue  { color: #60a5fa; }
     .terminal-body .amber { color: #fbbf24; }
 
-    /* Map preview */
     .map-preview {
       border-radius: var(--radius-sm);
       border: 1px solid var(--border-med);
       overflow: hidden;
       background: #0a1520;
       position: relative;
-    }
-
-    .map-preview svg {
-      width: 100%;
-      height: 100%;
     }
 
     /* ── BODY ── */
@@ -479,11 +446,7 @@
       margin-top: 2px;
     }
 
-    .project-sidebar {}
-
-    .sidebar-section {
-      margin-bottom: 24px;
-    }
+    .sidebar-section { margin-bottom: 24px; }
 
     .sidebar-label {
       font-size: 10.5px;
@@ -531,10 +494,7 @@
       background: rgba(255,255,255,0.04);
     }
 
-    .sidebar-link-btn:hover {
-      background: rgba(255,255,255,0.08);
-      border-color: var(--border-med);
-    }
+    .sidebar-link-btn:hover { background: rgba(255,255,255,0.08); border-color: var(--border-med); }
 
     .sidebar-link-btn.link-play {
       background: rgba(233,79,79,0.1);
@@ -574,9 +534,7 @@
       gap: 16px;
     }
 
-    @media (max-width: 700px) {
-      .eco-grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 700px) { .eco-grid { grid-template-columns: 1fr; } }
 
     .eco-card {
       background: var(--bg-card);
@@ -585,20 +543,9 @@
       padding: 20px 22px;
     }
 
-    .eco-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 8px;
-    }
+    .eco-title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .eco-desc  { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
 
-    .eco-desc {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.65;
-    }
-
-    /* ── DIVIDER ── */
     .divider {
       max-width: var(--max-width);
       margin: 0 auto 60px;
@@ -607,13 +554,7 @@
       border-top: 1px solid var(--border);
     }
 
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 32px 28px;
-      text-align: center;
-    }
-
+    footer { border-top: 1px solid var(--border); padding: 32px 28px; text-align: center; }
     footer p { font-size: 13px; color: var(--text-faint); }
     footer a { color: var(--text-muted); transition: color 0.15s; }
     footer a:hover { color: var(--text); text-decoration: none; }
@@ -634,7 +575,6 @@
 
 <main>
 
-  <!-- HERO -->
   <section class="hero">
     <span class="hero-eyebrow">Open Source</span>
     <h1>Projects by 7ports</h1>
@@ -646,7 +586,6 @@
     </div>
   </section>
 
-  <!-- PROJECT LIST -->
   <div class="section-header-row" id="projects">
     <p class="section-label">Open Source</p>
     <h2>Projects</h2>
@@ -654,9 +593,7 @@
 
   <div class="projects-list">
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- PROJECT VOLTRON                                -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!-- VOLTRON -->
     <div class="project">
       <div class="project-header">
         <div class="project-header-left">
@@ -665,10 +602,7 @@
             <span class="project-type type-mcp">MCP Server</span>
           </div>
           <div class="project-tagline">Specialized agent teams for Claude Code</div>
-          <div class="status-badge">
-            <span class="status-dot dot-stable"></span>
-            v2.3.8 · Stable
-          </div>
+          <div class="status-badge"><span class="status-dot dot-stable"></span> v2.3.8 · Stable</div>
         </div>
         <div class="project-header-right">
           <div class="header-links">
@@ -677,15 +611,11 @@
           </div>
         </div>
       </div>
-
-      <!-- MEDIA: terminal showing scaffold + progress -->
       <div class="project-media">
         <div class="media-grid media-grid-2">
           <div class="terminal-preview">
             <div class="terminal-bar">
-              <span class="terminal-dot td-red"></span>
-              <span class="terminal-dot td-amber"></span>
-              <span class="terminal-dot td-green"></span>
+              <span class="terminal-dot td-red"></span><span class="terminal-dot td-amber"></span><span class="terminal-dot td-green"></span>
               <span class="terminal-title">scaffold_project · web</span>
             </div>
             <div class="terminal-body">
@@ -706,9 +636,7 @@
           </div>
           <div class="terminal-preview">
             <div class="terminal-bar">
-              <span class="terminal-dot td-red"></span>
-              <span class="terminal-dot td-amber"></span>
-              <span class="terminal-dot td-green"></span>
+              <span class="terminal-dot td-red"></span><span class="terminal-dot td-amber"></span><span class="terminal-dot td-green"></span>
               <span class="terminal-title">get_progress · live dashboard</span>
             </div>
             <div class="terminal-body">
@@ -727,8 +655,6 @@
           </div>
         </div>
       </div>
-
-      <!-- BODY -->
       <div class="project-body">
         <div>
           <p class="project-description">
@@ -746,26 +672,18 @@
           <div class="sidebar-section">
             <div class="sidebar-label">Tech Stack</div>
             <div class="tech-tags">
-              <span class="tech-tag">Node.js</span>
-              <span class="tech-tag">MCP SDK</span>
-              <span class="tech-tag">Docker</span>
-              <span class="tech-tag">GitHub Actions</span>
-              <span class="tech-tag">Claude Code</span>
-              <span class="tech-tag">Cloudflare Workers</span>
+              <span class="tech-tag">Node.js</span><span class="tech-tag">MCP SDK</span><span class="tech-tag">Docker</span>
+              <span class="tech-tag">GitHub Actions</span><span class="tech-tag">Claude Code</span><span class="tech-tag">Cloudflare Workers</span>
             </div>
           </div>
           <div class="sidebar-section">
             <div class="sidebar-label">Links</div>
             <div class="sidebar-links">
               <a href="https://github.com/7ports/project-voltron" class="sidebar-link-btn">
-                <span class="link-icon">&#128196;</span>
-                <span class="link-label">Source on GitHub</span>
-                <span class="link-arrow">→</span>
+                <span class="link-icon">&#128196;</span><span class="link-label">Source on GitHub</span><span class="link-arrow">→</span>
               </a>
               <a href="https://7ports.github.io/project-voltron/" class="sidebar-link-btn link-docs">
-                <span class="link-icon">&#128218;</span>
-                <span class="link-label">Documentation</span>
-                <span class="link-arrow">→</span>
+                <span class="link-icon">&#128218;</span><span class="link-label">Documentation</span><span class="link-arrow">→</span>
               </a>
             </div>
           </div>
@@ -773,9 +691,7 @@
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- PROJECT ALEXANDRIA                             -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!-- ALEXANDRIA -->
     <div class="project">
       <div class="project-header">
         <div class="project-header-left">
@@ -784,10 +700,7 @@
             <span class="project-type type-knowledge">Knowledge Base</span>
           </div>
           <div class="project-tagline">Shared tooling guides across all Claude instances</div>
-          <div class="status-badge">
-            <span class="status-dot dot-active"></span>
-            Active
-          </div>
+          <div class="status-badge"><span class="status-dot dot-active"></span> Active</div>
         </div>
         <div class="project-header-right">
           <div class="header-links">
@@ -796,15 +709,11 @@
           </div>
         </div>
       </div>
-
-      <!-- MEDIA: guide browser preview -->
       <div class="project-media">
         <div class="media-grid media-grid-2">
           <div class="terminal-preview">
             <div class="terminal-bar">
-              <span class="terminal-dot td-red"></span>
-              <span class="terminal-dot td-amber"></span>
-              <span class="terminal-dot td-green"></span>
+              <span class="terminal-dot td-red"></span><span class="terminal-dot td-amber"></span><span class="terminal-dot td-green"></span>
               <span class="terminal-title">quick_setup · firebase-mcp</span>
             </div>
             <div class="terminal-body">
@@ -828,9 +737,7 @@
           </div>
           <div class="terminal-preview">
             <div class="terminal-bar">
-              <span class="terminal-dot td-red"></span>
-              <span class="terminal-dot td-amber"></span>
-              <span class="terminal-dot td-green"></span>
+              <span class="terminal-dot td-red"></span><span class="terminal-dot td-amber"></span><span class="terminal-dot td-green"></span>
               <span class="terminal-title">list_guides</span>
             </div>
             <div class="terminal-body">
@@ -855,7 +762,6 @@
           </div>
         </div>
       </div>
-
       <div class="project-body">
         <div>
           <p class="project-description">
@@ -873,24 +779,18 @@
           <div class="sidebar-section">
             <div class="sidebar-label">Tech Stack</div>
             <div class="tech-tags">
-              <span class="tech-tag">Node.js</span>
-              <span class="tech-tag">MCP SDK</span>
-              <span class="tech-tag">Markdown</span>
-              <span class="tech-tag">Claude Code</span>
+              <span class="tech-tag">Node.js</span><span class="tech-tag">MCP SDK</span>
+              <span class="tech-tag">Markdown</span><span class="tech-tag">Claude Code</span>
             </div>
           </div>
           <div class="sidebar-section">
             <div class="sidebar-label">Links</div>
             <div class="sidebar-links">
               <a href="https://github.com/7ports/project-alexandria" class="sidebar-link-btn">
-                <span class="link-icon">&#128196;</span>
-                <span class="link-label">Source on GitHub</span>
-                <span class="link-arrow">→</span>
+                <span class="link-icon">&#128196;</span><span class="link-label">Source on GitHub</span><span class="link-arrow">→</span>
               </a>
               <a href="https://7ports.github.io/project-alexandria/" class="sidebar-link-btn link-docs">
-                <span class="link-icon">&#128218;</span>
-                <span class="link-label">Documentation</span>
-                <span class="link-arrow">→</span>
+                <span class="link-icon">&#128218;</span><span class="link-label">Documentation</span><span class="link-arrow">→</span>
               </a>
             </div>
           </div>
@@ -898,9 +798,7 @@
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- PROJECT PEPPER                                 -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!-- PEPPER -->
     <div class="project">
       <div class="project-header">
         <div class="project-header-left">
@@ -909,83 +807,57 @@
             <span class="project-type type-game">Unity Game</span>
           </div>
           <div class="project-tagline">2D strategic card game for WebGL</div>
-          <div class="status-badge">
-            <span class="status-dot dot-alpha"></span>
-            Alpha
-          </div>
+          <div class="status-badge"><span class="status-dot dot-alpha"></span> Alpha</div>
         </div>
         <div class="project-header-right">
           <div class="header-links">
-            <a href="https://7ports.itch.io/project-pepper" class="btn btn-play">Play on itch.io</a>
+            <a href="https://sevenports.itch.io/x-o" class="btn btn-play">Play on itch.io</a>
             <a href="https://github.com/7ports/project-pepper" class="btn btn-ghost">GitHub</a>
           </div>
         </div>
       </div>
-
-      <!-- MEDIA: actual game sprites from the repo -->
       <div class="project-media">
         <div class="media-grid media-grid-3">
           <div class="media-frame">
-            <img
-              src="https://raw.githubusercontent.com/7ports/project-pepper/main/Assets/Sprites/4x4%20xo%201.png"
-              alt="Project Pepper — 4x4 game board screenshot"
-              loading="lazy"
-            >
+            <img src="https://raw.githubusercontent.com/7ports/project-pepper/main/Assets/Sprites/4x4%20xo%201.png" alt="Project Pepper — 4x4 game board" loading="lazy">
           </div>
           <div class="media-frame">
-            <img
-              src="https://raw.githubusercontent.com/7ports/project-pepper/main/Assets/Sprites/4x4%20xo.png"
-              alt="Project Pepper — game board state"
-              loading="lazy"
-            >
+            <img src="https://raw.githubusercontent.com/7ports/project-pepper/main/Assets/Sprites/4x4%20xo.png" alt="Project Pepper — game board state" loading="lazy">
           </div>
           <div class="media-frame">
-            <img
-              src="https://raw.githubusercontent.com/7ports/project-pepper/main/Assets/Sprites/tictactoeboard.png"
-              alt="Project Pepper — game board sprite"
-              loading="lazy"
-            >
+            <img src="https://raw.githubusercontent.com/7ports/project-pepper/main/Assets/Sprites/tictactoeboard.png" alt="Project Pepper — game board sprite" loading="lazy">
           </div>
         </div>
       </div>
-
       <div class="project-body">
         <div>
           <p class="project-description">
-            A strategic 2D card game built in Unity 6 for WebGL. Players compete on a 4×4 grid using a hand of cards — each card has unique effects that alter the board state. Three AI difficulty levels (Easy, Medium, Hard) challenge players as they try to claim four in a row. Firebase Analytics tracks all major gameplay events via a custom JavaScript bridge that connects Unity C# to the browser Firebase SDK, fully guarded for WebGL-only execution.
+            A strategic 2D card game built in Unity 6 for WebGL. Players compete on a 4×4 grid using a hand of cards — each card has unique effects that alter the board state. Three AI difficulty levels (Easy, Medium, Hard) challenge players as they try to claim four in a row. Firebase Analytics tracks all major gameplay events via a custom JavaScript bridge that connects Unity C# to the browser Firebase SDK.
           </p>
           <ul class="feature-list">
             <li>Hand-of-cards mechanic layered over a 4×4 Tic-Tac-Toe grid — cards are ScriptableObjects, each with distinct board effects that create strategic depth</li>
             <li>Three AI difficulty levels (Easy / Medium / Hard) with distinct decision-making strategies and evaluation heuristics</li>
             <li>Firebase Analytics via custom JS bridge: <code>FirebaseWebGL.cs</code> → <code>FirebaseAnalytics.jslib</code> → browser Firebase JS SDK — correctly guarded with <code>#if UNITY_WEBGL &amp;&amp; !UNITY_EDITOR</code> throughout</li>
             <li>Universal Render Pipeline (URP) v17.2 with custom sprite materials; TextMesh Pro for all UI text; singleton-based controller architecture</li>
-            <li>Fully managed by the Voltron agent team: scrum-master · csharp-dev · scene-architect · shader-artist · build-validator · asset-manager</li>
+            <li>Fully managed by Voltron agent team: scrum-master · csharp-dev · scene-architect · shader-artist · build-validator · asset-manager</li>
           </ul>
         </div>
         <div class="project-sidebar">
           <div class="sidebar-section">
             <div class="sidebar-label">Tech Stack</div>
             <div class="tech-tags">
-              <span class="tech-tag">Unity 6</span>
-              <span class="tech-tag">C#</span>
-              <span class="tech-tag">WebGL</span>
-              <span class="tech-tag">URP</span>
-              <span class="tech-tag">Firebase</span>
-              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">Unity 6</span><span class="tech-tag">C#</span><span class="tech-tag">WebGL</span>
+              <span class="tech-tag">URP</span><span class="tech-tag">Firebase</span><span class="tech-tag">JavaScript</span>
             </div>
           </div>
           <div class="sidebar-section">
             <div class="sidebar-label">Play &amp; Source</div>
             <div class="sidebar-links">
-              <a href="https://7ports.itch.io/project-pepper" class="sidebar-link-btn link-play">
-                <span class="link-icon">&#127918;</span>
-                <span class="link-label">Play on itch.io</span>
-                <span class="link-arrow">→</span>
+              <a href="https://sevenports.itch.io/x-o" class="sidebar-link-btn link-play">
+                <span class="link-icon">&#127918;</span><span class="link-label">Play on itch.io</span><span class="link-arrow">→</span>
               </a>
               <a href="https://github.com/7ports/project-pepper" class="sidebar-link-btn">
-                <span class="link-icon">&#128196;</span>
-                <span class="link-label">Source on GitHub</span>
-                <span class="link-arrow">→</span>
+                <span class="link-icon">&#128196;</span><span class="link-label">Source on GitHub</span><span class="link-arrow">→</span>
               </a>
             </div>
           </div>
@@ -993,9 +865,7 @@
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- PROJECT HAMMER                                 -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!-- HAMMER -->
     <div class="project">
       <div class="project-header">
         <div class="project-header-left">
@@ -1004,10 +874,7 @@
             <span class="project-type type-web">Web App</span>
           </div>
           <div class="project-tagline">Real-time Toronto Island Ferry tracker</div>
-          <div class="status-badge">
-            <span class="status-dot dot-prototype"></span>
-            Prototype
-          </div>
+          <div class="status-badge"><span class="status-dot dot-prototype"></span> Prototype</div>
         </div>
         <div class="project-header-right">
           <div class="header-links">
@@ -1016,58 +883,39 @@
           </div>
         </div>
       </div>
-
-      <!-- MEDIA: map preview illustration + stack overview -->
       <div class="project-media">
         <div class="media-grid media-grid-2">
-          <!-- SVG map illustration -->
-          <div class="map-preview" style="min-height:220px; display:flex; align-items:center; justify-content:center; padding: 20px;">
+          <div class="map-preview" style="min-height:220px; display:flex; align-items:center; justify-content:center; padding:20px;">
             <svg viewBox="0 0 480 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:220px;">
-              <!-- Water background -->
               <rect width="480" height="240" fill="#081828"/>
-              <!-- Grid lines (nautical chart style) -->
               <g stroke="#0d2a42" stroke-width="0.8">
-                <line x1="0" y1="60" x2="480" y2="60"/>
-                <line x1="0" y1="120" x2="480" y2="120"/>
-                <line x1="0" y1="180" x2="480" y2="180"/>
-                <line x1="120" y1="0" x2="120" y2="240"/>
-                <line x1="240" y1="0" x2="240" y2="240"/>
-                <line x1="360" y1="0" x2="360" y2="240"/>
+                <line x1="0" y1="60" x2="480" y2="60"/><line x1="0" y1="120" x2="480" y2="120"/>
+                <line x1="0" y1="180" x2="480" y2="180"/><line x1="120" y1="0" x2="120" y2="240"/>
+                <line x1="240" y1="0" x2="240" y2="240"/><line x1="360" y1="0" x2="360" y2="240"/>
               </g>
-              <!-- Mainland shore -->
               <path d="M0 60 Q80 50 160 55 Q240 48 320 52 Q400 46 480 58 L480 0 L0 0 Z" fill="#0f2030" stroke="#1a3a55" stroke-width="1"/>
-              <!-- Toronto Island -->
               <path d="M120 160 Q160 148 210 152 Q260 148 300 158 Q320 168 300 178 Q260 188 210 184 Q160 186 130 176 Z" fill="#0f2030" stroke="#1a3a55" stroke-width="1"/>
-              <!-- Ferry terminal dock (mainland) -->
               <rect x="228" y="58" width="24" height="8" fill="#1a3a55" rx="2"/>
               <text x="240" y="52" fill="#3a6a8a" font-size="9" text-anchor="middle" font-family="monospace">Jack Layton</text>
-              <!-- Island dock -->
               <rect x="228" y="148" width="24" height="8" fill="#1a3a55" rx="2"/>
               <text x="240" y="144" fill="#3a6a8a" font-size="9" text-anchor="middle" font-family="monospace">Ward's Island</text>
-              <!-- Ferry vessel 1 (animated position) -->
-              <g transform="translate(220, 95)">
+              <g transform="translate(220,95)">
                 <ellipse cx="0" cy="0" rx="10" ry="5" fill="#60a5fa" opacity="0.9"/>
                 <ellipse cx="0" cy="0" rx="10" ry="5" fill="none" stroke="#93c5fd" stroke-width="1"/>
-                <!-- Wake trail -->
                 <path d="M10 0 Q20 3 30 1" stroke="#60a5fa" stroke-width="1.5" fill="none" opacity="0.4"/>
                 <path d="M10 0 Q20 -3 30 -1" stroke="#60a5fa" stroke-width="1.5" fill="none" opacity="0.4"/>
               </g>
-              <!-- Ferry vessel 2 -->
-              <g transform="translate(260, 118)">
+              <g transform="translate(260,118)">
                 <ellipse cx="0" cy="0" rx="10" ry="5" fill="#34d399" opacity="0.8"/>
                 <ellipse cx="0" cy="0" rx="10" ry="5" fill="none" stroke="#6ee7b7" stroke-width="1"/>
               </g>
-              <!-- Label -->
               <text x="24" y="220" fill="#1a3a55" font-size="9" font-family="monospace">Toronto Harbour — Live AIS</text>
-              <!-- Pulse ring on vessel 1 -->
               <circle cx="220" cy="95" r="16" fill="none" stroke="#60a5fa" stroke-width="1" opacity="0.3"/>
             </svg>
           </div>
           <div class="terminal-preview">
             <div class="terminal-bar">
-              <span class="terminal-dot td-red"></span>
-              <span class="terminal-dot td-amber"></span>
-              <span class="terminal-dot td-green"></span>
+              <span class="terminal-dot td-red"></span><span class="terminal-dot td-amber"></span><span class="terminal-dot td-green"></span>
               <span class="terminal-title">AIS stream · SSE relay</span>
             </div>
             <div class="terminal-body">
@@ -1090,7 +938,6 @@
           </div>
         </div>
       </div>
-
       <div class="project-body">
         <div>
           <p class="project-description">
@@ -1108,30 +955,19 @@
           <div class="sidebar-section">
             <div class="sidebar-label">Tech Stack</div>
             <div class="tech-tags">
-              <span class="tech-tag">React 18</span>
-              <span class="tech-tag">TypeScript</span>
-              <span class="tech-tag">MapLibre GL JS</span>
-              <span class="tech-tag">Node.js</span>
-              <span class="tech-tag">Express 5</span>
-              <span class="tech-tag">Fly.io</span>
-              <span class="tech-tag">AWS</span>
-              <span class="tech-tag">Terraform</span>
-              <span class="tech-tag">Vite</span>
-              <span class="tech-tag">PWA</span>
+              <span class="tech-tag">React 18</span><span class="tech-tag">TypeScript</span><span class="tech-tag">MapLibre GL JS</span>
+              <span class="tech-tag">Node.js</span><span class="tech-tag">Express 5</span><span class="tech-tag">Fly.io</span>
+              <span class="tech-tag">AWS</span><span class="tech-tag">Terraform</span><span class="tech-tag">Vite</span><span class="tech-tag">PWA</span>
             </div>
           </div>
           <div class="sidebar-section">
             <div class="sidebar-label">Live &amp; Source</div>
             <div class="sidebar-links">
               <a href="https://ferries.yyz.live" class="sidebar-link-btn link-live">
-                <span class="link-icon">&#128506;</span>
-                <span class="link-label">ferries.yyz.live</span>
-                <span class="link-arrow">→</span>
+                <span class="link-icon">&#128506;</span><span class="link-label">ferries.yyz.live</span><span class="link-arrow">→</span>
               </a>
               <a href="https://github.com/7ports/project-hammer" class="sidebar-link-btn">
-                <span class="link-icon">&#128196;</span>
-                <span class="link-label">Source on GitHub</span>
-                <span class="link-arrow">→</span>
+                <span class="link-icon">&#128196;</span><span class="link-label">Source on GitHub</span><span class="link-arrow">→</span>
               </a>
             </div>
           </div>
@@ -1139,11 +975,10 @@
       </div>
     </div>
 
-  </div><!-- /projects-list -->
+  </div>
 
   <hr class="divider">
 
-  <!-- ECOSYSTEM -->
   <div class="ecosystem-wrap" id="ecosystem">
     <div class="section-header-row" style="padding-left:0;padding-right:0;">
       <p class="section-label">How it fits together</p>
@@ -1153,21 +988,15 @@
     <div class="eco-grid">
       <div class="eco-card">
         <div class="eco-title">Voltron + Alexandria</div>
-        <p class="eco-desc">
-          The two MCP servers are designed to work together. Voltron provides the agent team; Alexandria provides the knowledge base. Every Voltron agent calls <code>quick_setup</code> before installing any tool. After setup, they call <code>update_guide</code>. Tool knowledge flows from sessions into Alexandria for every future project.
-        </p>
+        <p class="eco-desc">The two MCP servers are designed to work together. Voltron provides the agent team; Alexandria provides the knowledge base. Every Voltron agent calls <code>quick_setup</code> before installing any tool. After setup, they call <code>update_guide</code>. Tool knowledge flows from sessions into Alexandria for every future project.</p>
       </div>
       <div class="eco-card">
         <div class="eco-title">Voltron in Production</div>
-        <p class="eco-desc">
-          Project Pepper and Project Hammer are both developed using the full Voltron workflow — scrum-master for planning, specialist agents in Docker for implementation, live progress dashboard for visibility. They serve as real-world validation for the agent templates and generate the reflections that feed the self-improvement loop.
-        </p>
+        <p class="eco-desc">Project Pepper and Project Hammer are both developed using the full Voltron workflow — scrum-master for planning, specialist agents in Docker for implementation, live progress dashboard for visibility. They serve as real-world validation for the agent templates and generate the reflections that feed the self-improvement loop.</p>
       </div>
       <div class="eco-card">
         <div class="eco-title">Self-Improving Loop</div>
-        <p class="eco-desc">
-          Specialist agents submit post-session reflections at phase completion and session end. A GitHub Actions workflow processes them three times a week (Mon/Wed/Fri at 10:00 UTC), applies targeted improvements to agent templates, and opens PRs for human review before anything reaches <code>main</code>.
-        </p>
+        <p class="eco-desc">Specialist agents submit post-session reflections at phase completion and session end. A GitHub Actions workflow processes them three times a week (Mon/Wed/Fri at 10:00 UTC), applies targeted improvements to agent templates, and opens PRs for human review before anything reaches <code>main</code>.</p>
       </div>
     </div>
   </div>
