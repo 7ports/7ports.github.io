@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>7ports — AI-Native Developer Tooling</title>
+  <meta name="description" content="Building AI-native developer tooling. Projects include Voltron (MCP agent framework), Alexandria (shared knowledge base), Pepper (Unity card game), and Hammer (real-time ferry tracker).">
+  <meta property="og:title" content="7ports — AI-Native Developer Tooling">
+  <meta property="og:description" content="Building AI-native developer tooling at the frontier of human-AI collaboration.">
+  <meta property="og:type" content="website">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:            #080d1a;
+      --bg-card:       #0d1528;
+      --bg-card-hover: #111d36;
+      --border:        rgba(255,255,255,0.07);
+      --border-hover:  rgba(255,255,255,0.16);
+      --primary:       #7c3aed;
+      --primary-light: #a78bfa;
+      --text:          #dde4f0;
+      --text-muted:    #7a8baa;
+      --text-faint:    #3a4d6a;
+      --tag-bg:        rgba(255,255,255,0.055);
+      --radius:        14px;
+      --radius-sm:     7px;
+      --max-width:     1120px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a { color: var(--primary-light); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    code {
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+      font-size: 0.85em;
+      background: rgba(255,255,255,0.07);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #c4b5fd;
+    }
+
+    /* ── NAV ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8,13,26,0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 28px;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: -0.5px;
+      color: #fff;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      color: var(--text-muted);
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 100px 28px 80px;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--primary-light);
+      margin-bottom: 22px;
+      padding: 4px 14px;
+      border: 1px solid rgba(124,58,237,0.3);
+      border-radius: 20px;
+      background: rgba(124,58,237,0.08);
+    }
+
+    .hero h1 {
+      font-size: clamp(34px, 5.5vw, 56px);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      color: #fff;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, #a78bfa 0%, #60a5fa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 500px;
+      margin: 0 auto 40px;
+      line-height: 1.75;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.2s;
+      text-decoration: none !important;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 0 0 1px rgba(124,58,237,0.5), 0 4px 16px rgba(124,58,237,0.25);
+    }
+    .btn-primary:hover {
+      background: #6d28d9;
+      box-shadow: 0 0 0 1px rgba(124,58,237,0.7), 0 6px 20px rgba(124,58,237,0.35);
+    }
+
+    .btn-ghost {
+      background: var(--tag-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover {
+      border-color: var(--border-hover);
+      background: rgba(255,255,255,0.09);
+    }
+
+    /* ── SECTIONS ── */
+    .section-wrap {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 28px 90px;
+    }
+
+    .section-header {
+      margin-bottom: 44px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--primary-light);
+      margin-bottom: 8px;
+    }
+
+    .section-header h2 {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -0.7px;
+      color: #fff;
+    }
+
+    /* ── PROJECT GRID ── */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+
+    @media (max-width: 780px) {
+      .project-grid { grid-template-columns: 1fr; }
+      .hero { padding-top: 64px; }
+    }
+
+    /* ── PROJECT CARD ── */
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: border-color 0.2s, background 0.2s, transform 0.25s, box-shadow 0.25s;
+    }
+
+    .project-card:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .project-name {
+      font-size: 21px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.4px;
+    }
+
+    .project-tagline {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    .project-type {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      padding: 4px 11px;
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .type-mcp       { background: rgba(124,58,237,0.13); color: #c4b5fd; border: 1px solid rgba(124,58,237,0.28); }
+    .type-knowledge { background: rgba(16,185,129,0.11); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.25); }
+    .type-game      { background: rgba(245,158,11,0.11); color: #fcd34d; border: 1px solid rgba(245,158,11,0.24); }
+    .type-web       { background: rgba(37,99,235,0.12);  color: #93c5fd; border: 1px solid rgba(37,99,235,0.25); }
+
+    .project-description {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .feature-list li {
+      font-size: 13.5px;
+      color: var(--text);
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      line-height: 1.5;
+    }
+
+    .feature-list li::before {
+      content: '—';
+      color: var(--primary-light);
+      flex-shrink: 0;
+      font-size: 13px;
+      margin-top: 2px;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .tech-tag {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: var(--tag-bg);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .card-links {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .card-link {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary-light);
+    }
+
+    .card-link:hover { text-decoration: underline; }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .dot-stable    { background: #10b981; box-shadow: 0 0 5px rgba(16,185,129,0.6); }
+    .dot-active    { background: #10b981; box-shadow: 0 0 5px rgba(16,185,129,0.6); }
+    .dot-alpha     { background: #f59e0b; box-shadow: 0 0 5px rgba(245,158,11,0.6); }
+    .dot-prototype { background: #3b82f6; box-shadow: 0 0 5px rgba(59,130,246,0.6); }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      max-width: var(--max-width);
+      margin: 0 auto 80px;
+      padding: 0 28px;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── ECOSYSTEM SECTION ── */
+    .ecosystem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 700px) {
+      .ecosystem-grid { grid-template-columns: 1fr; }
+    }
+
+    .eco-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+    }
+
+    .eco-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .eco-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 36px 28px;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 13px;
+      color: var(--text-faint);
+    }
+
+    footer a { color: var(--text-muted); transition: color 0.15s; }
+    footer a:hover { color: var(--text); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <span class="logo">7ports</span>
+    <ul class="nav-links">
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#ecosystem">Ecosystem</a></li>
+      <li><a href="https://github.com/7ports">GitHub</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="hero-eyebrow">Open Source</span>
+    <h1>AI-native<br><span>developer tooling</span></h1>
+    <p>Infrastructure, agents, and games at the frontier of human-AI collaboration.</p>
+    <div class="hero-cta">
+      <a href="https://github.com/7ports" class="btn btn-primary">View on GitHub</a>
+      <a href="https://7ports.github.io/project-voltron/" class="btn btn-ghost">Voltron Docs</a>
+      <a href="https://7ports.github.io/project-alexandria/" class="btn btn-ghost">Alexandria Docs</a>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <div class="section-wrap" id="projects">
+    <div class="section-header">
+      <p class="section-label">Open Source Projects</p>
+      <h2>Projects</h2>
+    </div>
+    <div class="project-grid">
+
+      <!-- VOLTRON -->
+      <div class="project-card">
+        <div class="card-top">
+          <div>
+            <div class="project-name">Project Voltron</div>
+            <div class="project-tagline">MCP server · Claude Code agent teams</div>
+          </div>
+          <span class="project-type type-mcp">MCP Server</span>
+        </div>
+        <p class="project-description">
+          Scaffold any project with battle-tested subagent definitions for Claude Code. Voltron provides a coordinated team of specialists — a scrum-master that decomposes work, a project-planner that designs architecture, and domain experts that implement it. Specialist agents run in Docker containers for blast-radius isolation, and the whole system self-improves through post-session reflections.
+        </p>
+        <ul class="feature-list">
+          <li>11 specialist agents spanning Unity, web/fullstack, and general software development</li>
+          <li>Self-improving: post-session reflections feed a GitHub Actions pipeline (Mon/Wed/Fri) that patches templates and opens PRs for review</li>
+          <li>Auto-update hook silently upgrades installed agent files at the start of every session</li>
+          <li>Real-time progress dashboard with Chrome MCP integration — opens and focuses automatically when work begins</li>
+          <li>Integrates with Project Alexandria — agents consult the shared knowledge base before any tool installation (mandatory)</li>
+        </ul>
+        <div class="tech-tags">
+          <span class="tech-tag">Node.js</span>
+          <span class="tech-tag">MCP SDK</span>
+          <span class="tech-tag">Docker</span>
+          <span class="tech-tag">GitHub Actions</span>
+          <span class="tech-tag">Claude Code</span>
+          <span class="tech-tag">Cloudflare Workers</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-links">
+            <a href="https://github.com/7ports/project-voltron" class="card-link">GitHub →</a>
+            <a href="https://7ports.github.io/project-voltron/" class="card-link">Docs →</a>
+          </div>
+          <span class="status-badge"><span class="status-dot dot-stable"></span> v2.3.8 · Stable</span>
+        </div>
+      </div>
+
+      <!-- ALEXANDRIA -->
+      <div class="project-card">
+        <div class="card-top">
+          <div>
+            <div class="project-name">Project Alexandria</div>
+            <div class="project-tagline">Shared knowledge base · all Claude instances</div>
+          </div>
+          <span class="project-type type-knowledge">Knowledge Base</span>
+        </div>
+        <p class="project-description">
+          A collaboratively maintained library of tooling setup guides shared across Claude instances via MCP. Every Claude instance with Alexandria installed becomes both a consumer and a contributor — when one instance sets up a tool and documents the process, every other instance benefits. Setup knowledge accumulates across projects and sessions instead of being rediscovered from scratch.
+        </p>
+        <ul class="feature-list">
+          <li>Agents call <code>quick_setup</code> before any tool install — mandatory, not optional; <code>update_guide</code> after completion</li>
+          <li>13+ guides: Git, GitHub, Firebase, AWS CLI, Claude in Chrome, Claude Preview, Beads, Memory MCP, CoPlay, and more</li>
+          <li>Strict content boundary — only non-project-specific, reusable knowledge belongs here; project-specific decisions stay in <code>CLAUDE.md</code></li>
+          <li>No database, no external dependencies — plain markdown files readable by humans and Claude alike</li>
+          <li>Companion to Voltron — all Voltron agents reference Alexandria; <code>scrum-master</code> calls <code>get_project_setup_recommendations</code> on every new project</li>
+        </ul>
+        <div class="tech-tags">
+          <span class="tech-tag">Node.js</span>
+          <span class="tech-tag">MCP SDK</span>
+          <span class="tech-tag">Markdown</span>
+          <span class="tech-tag">Claude Code</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-links">
+            <a href="https://github.com/7ports/project-alexandria" class="card-link">GitHub →</a>
+            <a href="https://7ports.github.io/project-alexandria/" class="card-link">Docs →</a>
+          </div>
+          <span class="status-badge"><span class="status-dot dot-active"></span> Active</span>
+        </div>
+      </div>
+
+      <!-- PEPPER -->
+      <div class="project-card">
+        <div class="card-top">
+          <div>
+            <div class="project-name">Project Pepper</div>
+            <div class="project-tagline">2D card game · Unity 6 · WebGL</div>
+          </div>
+          <span class="project-type type-game">Unity Game</span>
+        </div>
+        <p class="project-description">
+          A strategic 2D card game built in Unity 6 for WebGL. Players compete on a 4×4 grid using a hand of cards — each card has unique effects that alter the board state. Three AI difficulty levels challenge players as they try to claim four in a row on the expanded grid. Firebase Analytics tracks all major gameplay events via a custom JavaScript bridge.
+        </p>
+        <ul class="feature-list">
+          <li>Hand-of-cards mechanic on a 4×4 Tic-Tac-Toe grid — cards as ScriptableObjects, each with distinct board effects</li>
+          <li>Three AI opponent difficulty levels (Easy / Medium / Hard) with distinct decision-making strategies</li>
+          <li>Firebase Analytics via custom JS bridge: <code>FirebaseWebGL.cs</code> → <code>FirebaseAnalytics.jslib</code> → browser Firebase SDK — fully WebGL-compatible, guarded with <code>#if UNITY_WEBGL && !UNITY_EDITOR</code></li>
+          <li>Universal Render Pipeline (URP) with custom sprite materials; TextMesh Pro for all UI text</li>
+          <li>Full Voltron agent team: scrum-master · csharp-dev · scene-architect · shader-artist · build-validator · asset-manager</li>
+        </ul>
+        <div class="tech-tags">
+          <span class="tech-tag">Unity 6</span>
+          <span class="tech-tag">C#</span>
+          <span class="tech-tag">WebGL</span>
+          <span class="tech-tag">URP</span>
+          <span class="tech-tag">Firebase</span>
+          <span class="tech-tag">JavaScript</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-links">
+            <a href="https://github.com/7ports/project-pepper" class="card-link">GitHub →</a>
+          </div>
+          <span class="status-badge"><span class="status-dot dot-alpha"></span> Alpha</span>
+        </div>
+      </div>
+
+      <!-- HAMMER -->
+      <div class="project-card">
+        <div class="card-top">
+          <div>
+            <div class="project-name">Project Hammer</div>
+            <div class="project-tagline">Real-time ferry tracker · Toronto Harbour</div>
+          </div>
+          <span class="project-type type-web">Web App</span>
+        </div>
+        <p class="project-description">
+          Real-time map showing Toronto Island Ferry positions using live AIS vessel data. A Node.js backend on Fly.io proxies the aisstream.io WebSocket (which blocks direct browser connections) and relays position updates as SSE. The React PWA renders ferries gliding across the harbour with 60fps smooth interpolation via <code>lerp()</code> + <code>requestAnimationFrame</code>.
+        </p>
+        <ul class="feature-list">
+          <li>Live AIS position tracking for all four Toronto Island Ferry vessels (Sam McBride, Wm Inglis, Thomas Rennie, Marilyn Bell I) filtered by MMSI</li>
+          <li>SSE over WebSocket relay — <code>EventSource</code> auto-reconnects, no client-side WebSocket library needed; unidirectional AIS data is a perfect fit</li>
+          <li>60fps smooth vessel movement interpolating between ~10s AIS ping intervals using <code>lerp()</code> + <code>requestAnimationFrame</code></li>
+          <li>MapLibre GL JS v5 + react-map-gl v8 + MapTiler Ocean chart style — fully open source, no proprietary map SDK lock-in</li>
+          <li>Full production infrastructure: Terraform (S3 + CloudFront + ACM + Route53) · Fly.io yyz region · GitHub Actions CI/CD · PWA with service worker</li>
+        </ul>
+        <div class="tech-tags">
+          <span class="tech-tag">React 18</span>
+          <span class="tech-tag">TypeScript</span>
+          <span class="tech-tag">MapLibre GL JS</span>
+          <span class="tech-tag">Node.js</span>
+          <span class="tech-tag">Express 5</span>
+          <span class="tech-tag">Fly.io</span>
+          <span class="tech-tag">AWS</span>
+          <span class="tech-tag">Terraform</span>
+          <span class="tech-tag">Vite</span>
+          <span class="tech-tag">PWA</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-links">
+            <a href="https://github.com/7ports/project-hammer" class="card-link">GitHub →</a>
+          </div>
+          <span class="status-badge"><span class="status-dot dot-prototype"></span> Prototype</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ECOSYSTEM -->
+  <div class="section-wrap" id="ecosystem">
+    <div class="section-header">
+      <p class="section-label">How it fits together</p>
+      <h2>The Ecosystem</h2>
+    </div>
+    <div class="ecosystem-grid">
+      <div class="eco-card">
+        <div class="eco-title">Voltron + Alexandria</div>
+        <p class="eco-desc">
+          The two MCP servers are designed to work together. Voltron provides the agent team; Alexandria provides the knowledge base. Every Voltron agent is required to call <code>quick_setup</code> before installing any tool. After setup, they call <code>update_guide</code>. Tool knowledge flows from sessions back into Alexandria for every future project.
+        </p>
+      </div>
+      <div class="eco-card">
+        <div class="eco-title">Voltron + Projects</div>
+        <p class="eco-desc">
+          Project Pepper (Unity) and Project Hammer (web) are both developed using the full Voltron agent workflow — scrum-master for planning, domain specialists for implementation, all coordinated via the progress dashboard. They serve as real-world validation for the agent templates.
+        </p>
+      </div>
+      <div class="eco-card">
+        <div class="eco-title">Self-Improving Loop</div>
+        <p class="eco-desc">
+          Specialist agents submit post-session reflections at phase completion and session end. The scrum-master submits automatically. A GitHub Actions workflow processes reflections three times a week, applies targeted improvements to agent templates, and opens PRs for review — closing the loop between usage and improvement.
+        </p>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <p>
+    &copy; 2026 7ports &nbsp;&middot;&nbsp;
+    <a href="https://github.com/7ports">github.com/7ports</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://7ports.github.io/project-voltron/">Voltron</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://7ports.github.io/project-alexandria/">Alexandria</a>
+  </p>
+</footer>
+
+</body>
+</html>
