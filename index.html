@@ -3,29 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>7ports — AI-Native Developer Tooling</title>
-  <meta name="description" content="Building AI-native developer tooling. Projects include Voltron (MCP agent framework), Alexandria (shared knowledge base), Pepper (Unity card game), and Hammer (real-time ferry tracker).">
-  <meta property="og:title" content="7ports — AI-Native Developer Tooling">
-  <meta property="og:description" content="Building AI-native developer tooling at the frontier of human-AI collaboration.">
+  <title>Projects by 7ports</title>
+  <meta name="description" content="Projects by 7ports — AI-native developer tooling, games, and apps. Includes Project Voltron, Alexandria, Pepper, and Hammer.">
+  <meta property="og:title" content="Projects by 7ports">
+  <meta property="og:description" content="AI-native developer tooling, games, and apps.">
   <meta property="og:type" content="website">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --bg:            #080d1a;
+      --bg-section:    #0b1020;
       --bg-card:       #0d1528;
-      --bg-card-hover: #111d36;
+      --bg-media:      #0a1120;
       --border:        rgba(255,255,255,0.07);
-      --border-hover:  rgba(255,255,255,0.16);
+      --border-med:    rgba(255,255,255,0.12);
       --primary:       #7c3aed;
       --primary-light: #a78bfa;
       --text:          #dde4f0;
       --text-muted:    #7a8baa;
       --text-faint:    #3a4d6a;
       --tag-bg:        rgba(255,255,255,0.055);
-      --radius:        14px;
-      --radius-sm:     7px;
-      --max-width:     1120px;
+      --radius:        16px;
+      --radius-sm:     8px;
+      --radius-xs:     5px;
+      --max-width:     1080px;
     }
 
     html { scroll-behavior: smooth; }
@@ -42,8 +44,8 @@
     a:hover { text-decoration: underline; }
 
     code {
-      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
-      font-size: 0.85em;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.83em;
       background: rgba(255,255,255,0.07);
       padding: 2px 6px;
       border-radius: 4px;
@@ -55,7 +57,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(8,13,26,0.88);
+      background: rgba(8,13,26,0.9);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
@@ -65,7 +67,7 @@
       max-width: var(--max-width);
       margin: 0 auto;
       padding: 0 28px;
-      height: 58px;
+      height: 56px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -73,19 +75,19 @@
 
     .logo {
       font-weight: 800;
-      font-size: 18px;
-      letter-spacing: -0.5px;
+      font-size: 17px;
+      letter-spacing: -0.4px;
       color: #fff;
     }
 
     .nav-links {
       display: flex;
-      gap: 28px;
+      gap: 24px;
       list-style: none;
     }
 
     .nav-links a {
-      font-size: 14px;
+      font-size: 13.5px;
       color: var(--text-muted);
       transition: color 0.15s;
     }
@@ -96,7 +98,7 @@
     .hero {
       max-width: var(--max-width);
       margin: 0 auto;
-      padding: 100px 28px 80px;
+      padding: 84px 28px 72px;
       text-align: center;
     }
 
@@ -107,7 +109,7 @@
       letter-spacing: 2px;
       text-transform: uppercase;
       color: var(--primary-light);
-      margin-bottom: 22px;
+      margin-bottom: 20px;
       padding: 4px 14px;
       border: 1px solid rgba(124,58,237,0.3);
       border-radius: 20px;
@@ -115,78 +117,93 @@
     }
 
     .hero h1 {
-      font-size: clamp(34px, 5.5vw, 56px);
+      font-size: clamp(30px, 5vw, 50px);
       font-weight: 800;
-      letter-spacing: -1.5px;
-      line-height: 1.1;
+      letter-spacing: -1.2px;
+      line-height: 1.15;
       color: #fff;
-      margin-bottom: 22px;
-    }
-
-    .hero h1 span {
-      background: linear-gradient(135deg, #a78bfa 0%, #60a5fa 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      margin-bottom: 18px;
     }
 
     .hero p {
-      font-size: 18px;
+      font-size: 17px;
       color: var(--text-muted);
-      max-width: 500px;
-      margin: 0 auto 40px;
+      max-width: 460px;
+      margin: 0 auto 36px;
       line-height: 1.75;
     }
 
     .hero-cta {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       justify-content: center;
       flex-wrap: wrap;
     }
 
+    /* ── BUTTONS ── */
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 11px 22px;
+      gap: 7px;
+      padding: 10px 20px;
       border-radius: var(--radius-sm);
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 600;
       transition: all 0.2s;
       text-decoration: none !important;
       cursor: pointer;
+      white-space: nowrap;
     }
 
     .btn-primary {
       background: var(--primary);
       color: #fff;
-      box-shadow: 0 0 0 1px rgba(124,58,237,0.5), 0 4px 16px rgba(124,58,237,0.25);
+      box-shadow: 0 4px 14px rgba(124,58,237,0.3);
     }
-    .btn-primary:hover {
-      background: #6d28d9;
-      box-shadow: 0 0 0 1px rgba(124,58,237,0.7), 0 6px 20px rgba(124,58,237,0.35);
-    }
+    .btn-primary:hover { background: #6d28d9; box-shadow: 0 4px 20px rgba(124,58,237,0.45); }
 
     .btn-ghost {
-      background: var(--tag-bg);
+      background: rgba(255,255,255,0.055);
       color: var(--text);
       border: 1px solid var(--border);
     }
-    .btn-ghost:hover {
-      border-color: var(--border-hover);
-      background: rgba(255,255,255,0.09);
-    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.09); border-color: var(--border-med); }
 
-    /* ── SECTIONS ── */
-    .section-wrap {
+    .btn-play {
+      background: #e94f4f;
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(233,79,79,0.3);
+    }
+    .btn-play:hover { background: #d43c3c; }
+
+    .btn-live {
+      background: #0e7c5a;
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(14,124,90,0.3);
+    }
+    .btn-live:hover { background: #0a6349; }
+
+    .btn-docs {
+      background: rgba(124,58,237,0.12);
+      color: var(--primary-light);
+      border: 1px solid rgba(124,58,237,0.25);
+    }
+    .btn-docs:hover { background: rgba(124,58,237,0.2); }
+
+    /* ── PROJECT SECTIONS ── */
+    .projects-list {
       max-width: var(--max-width);
       margin: 0 auto;
-      padding: 0 28px 90px;
+      padding: 0 28px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
     }
 
-    .section-header {
-      margin-bottom: 44px;
+    .section-header-row {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 28px 36px;
     }
 
     .section-label {
@@ -198,149 +215,68 @@
       margin-bottom: 8px;
     }
 
-    .section-header h2 {
-      font-size: 30px;
+    .section-header-row h2 {
+      font-size: 28px;
       font-weight: 800;
-      letter-spacing: -0.7px;
+      letter-spacing: -0.6px;
       color: #fff;
-    }
-
-    /* ── PROJECT GRID ── */
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 22px;
-    }
-
-    @media (max-width: 780px) {
-      .project-grid { grid-template-columns: 1fr; }
-      .hero { padding-top: 64px; }
     }
 
     /* ── PROJECT CARD ── */
-    .project-card {
+    .project {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      transition: border-color 0.2s, background 0.2s, transform 0.25s, box-shadow 0.25s;
+      overflow: hidden;
     }
 
-    .project-card:hover {
-      border-color: var(--border-hover);
-      background: var(--bg-card-hover);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.35);
-    }
-
-    .card-top {
+    /* Top bar: name, type, links */
+    .project-header {
+      padding: 28px 32px 22px;
+      border-bottom: 1px solid var(--border);
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .project-header-left { flex: 1; min-width: 200px; }
+
+    .project-name-row {
+      display: flex;
+      align-items: center;
       gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
     }
 
     .project-name {
-      font-size: 21px;
+      font-size: 24px;
       font-weight: 800;
       color: #fff;
-      letter-spacing: -0.4px;
-    }
-
-    .project-tagline {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-top: 3px;
+      letter-spacing: -0.5px;
     }
 
     .project-type {
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.3px;
-      padding: 4px 11px;
+      padding: 3px 11px;
       border-radius: 20px;
       white-space: nowrap;
-      flex-shrink: 0;
     }
 
-    .type-mcp       { background: rgba(124,58,237,0.13); color: #c4b5fd; border: 1px solid rgba(124,58,237,0.28); }
+    .type-mcp       { background: rgba(124,58,237,0.14); color: #c4b5fd; border: 1px solid rgba(124,58,237,0.3); }
     .type-knowledge { background: rgba(16,185,129,0.11); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.25); }
-    .type-game      { background: rgba(245,158,11,0.11); color: #fcd34d; border: 1px solid rgba(245,158,11,0.24); }
-    .type-web       { background: rgba(37,99,235,0.12);  color: #93c5fd; border: 1px solid rgba(37,99,235,0.25); }
+    .type-game      { background: rgba(245,158,11,0.12); color: #fcd34d; border: 1px solid rgba(245,158,11,0.25); }
+    .type-web       { background: rgba(37,99,235,0.13);  color: #93c5fd; border: 1px solid rgba(37,99,235,0.28); }
 
-    .project-description {
+    .project-tagline {
       font-size: 14px;
       color: var(--text-muted);
-      line-height: 1.75;
+      margin-top: 5px;
     }
-
-    .feature-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-    }
-
-    .feature-list li {
-      font-size: 13.5px;
-      color: var(--text);
-      display: flex;
-      align-items: flex-start;
-      gap: 9px;
-      line-height: 1.5;
-    }
-
-    .feature-list li::before {
-      content: '—';
-      color: var(--primary-light);
-      flex-shrink: 0;
-      font-size: 13px;
-      margin-top: 2px;
-    }
-
-    .tech-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-    }
-
-    .tech-tag {
-      font-size: 12px;
-      font-weight: 500;
-      padding: 3px 10px;
-      border-radius: 20px;
-      background: var(--tag-bg);
-      color: var(--text-muted);
-      border: 1px solid var(--border);
-    }
-
-    .card-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: auto;
-      padding-top: 14px;
-      border-top: 1px solid var(--border);
-    }
-
-    .card-links {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-    }
-
-    .card-link {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--primary-light);
-    }
-
-    .card-link:hover { text-decoration: underline; }
 
     .status-badge {
       display: inline-flex;
@@ -349,6 +285,7 @@
       font-size: 12px;
       font-weight: 500;
       color: var(--text-muted);
+      margin-top: 10px;
     }
 
     .status-dot {
@@ -363,35 +300,293 @@
     .dot-alpha     { background: #f59e0b; box-shadow: 0 0 5px rgba(245,158,11,0.6); }
     .dot-prototype { background: #3b82f6; box-shadow: 0 0 5px rgba(59,130,246,0.6); }
 
-    /* ── DIVIDER ── */
-    .section-divider {
-      max-width: var(--max-width);
-      margin: 0 auto 80px;
-      padding: 0 28px;
-      border: none;
-      border-top: 1px solid var(--border);
+    .project-header-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
     }
 
-    /* ── ECOSYSTEM SECTION ── */
-    .ecosystem-grid {
+    .header-links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    /* ── MEDIA SECTION ── */
+    .project-media {
+      background: var(--bg-media);
+      border-bottom: 1px solid var(--border);
+      padding: 24px 32px;
+    }
+
+    .media-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .media-grid-2 { grid-template-columns: 1fr 1fr; }
+    .media-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .media-grid-1 { grid-template-columns: 1fr; max-width: 720px; margin: 0 auto; }
+
+    .media-frame {
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      border: 1px solid var(--border-med);
+      background: #070c18;
+      position: relative;
+    }
+
+    .media-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      image-rendering: pixelated; /* crisp for pixel art */
+    }
+
+    /* Placeholder frames for projects without screenshots yet */
+    .media-placeholder {
+      aspect-ratio: 16/9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.025);
+      border-radius: var(--radius-sm);
+      border: 1px dashed rgba(255,255,255,0.1);
+      color: var(--text-faint);
+      font-size: 13px;
+    }
+
+    .media-placeholder .ph-icon {
+      font-size: 28px;
+      opacity: 0.4;
+    }
+
+    .media-placeholder span {
+      font-size: 12px;
+      color: var(--text-faint);
+    }
+
+    /* Terminal / code preview */
+    .terminal-preview {
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-med);
+      overflow: hidden;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .terminal-bar {
+      background: #1a1f2e;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .terminal-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .td-red   { background: #ff5f57; }
+    .td-amber { background: #ffbd2e; }
+    .td-green { background: #28c840; }
+
+    .terminal-title {
+      flex: 1;
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-faint);
+    }
+
+    .terminal-body {
+      background: #070c18;
+      padding: 16px 20px;
+      color: #a5b4c8;
+      overflow-x: auto;
+    }
+
+    .terminal-body .dim   { color: #3a4d6a; }
+    .terminal-body .green { color: #34d399; }
+    .terminal-body .purple{ color: #a78bfa; }
+    .terminal-body .blue  { color: #60a5fa; }
+    .terminal-body .amber { color: #fbbf24; }
+
+    /* Map preview */
+    .map-preview {
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-med);
+      overflow: hidden;
+      background: #0a1520;
+      position: relative;
+    }
+
+    .map-preview svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ── BODY ── */
+    .project-body {
+      padding: 28px 32px;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 40px;
+      align-items: start;
+    }
+
+    @media (max-width: 760px) {
+      .project-body { grid-template-columns: 1fr; gap: 24px; }
+      .project-header { padding: 20px 20px 16px; }
+      .project-media { padding: 16px 20px; }
+      .project-body { padding: 20px 20px; }
+      .media-grid-2, .media-grid-3 { grid-template-columns: 1fr; }
+      .project-header-right { align-items: flex-start; }
+      .header-links { justify-content: flex-start; }
+      .hero { padding-top: 56px; }
+    }
+
+    .project-description {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .feature-list li {
+      font-size: 13.5px;
+      color: var(--text);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.55;
+    }
+
+    .feature-list li::before {
+      content: '—';
+      color: var(--primary-light);
+      flex-shrink: 0;
+      font-size: 13px;
+      margin-top: 2px;
+    }
+
+    .project-sidebar {}
+
+    .sidebar-section {
+      margin-bottom: 24px;
+    }
+
+    .sidebar-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 10px;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .tech-tag {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 11px;
+      border-radius: 20px;
+      background: var(--tag-bg);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+
+    .sidebar-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .sidebar-link-btn {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 10px 14px;
+      border-radius: var(--radius-xs);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none !important;
+      transition: all 0.18s;
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .sidebar-link-btn:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: var(--border-med);
+    }
+
+    .sidebar-link-btn.link-play {
+      background: rgba(233,79,79,0.1);
+      border-color: rgba(233,79,79,0.25);
+      color: #fca5a5;
+    }
+    .sidebar-link-btn.link-play:hover { background: rgba(233,79,79,0.18); }
+
+    .sidebar-link-btn.link-live {
+      background: rgba(14,124,90,0.1);
+      border-color: rgba(14,124,90,0.25);
+      color: #6ee7b7;
+    }
+    .sidebar-link-btn.link-live:hover { background: rgba(14,124,90,0.18); }
+
+    .sidebar-link-btn.link-docs {
+      background: rgba(124,58,237,0.09);
+      border-color: rgba(124,58,237,0.22);
+      color: var(--primary-light);
+    }
+    .sidebar-link-btn.link-docs:hover { background: rgba(124,58,237,0.16); }
+
+    .link-icon { font-size: 15px; width: 18px; text-align: center; flex-shrink: 0; }
+    .link-label { flex: 1; }
+    .link-arrow { opacity: 0.5; }
+
+    /* ── ECOSYSTEM ── */
+    .ecosystem-wrap {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 28px 80px;
+    }
+
+    .eco-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 16px;
     }
 
     @media (max-width: 700px) {
-      .ecosystem-grid { grid-template-columns: 1fr; }
+      .eco-grid { grid-template-columns: 1fr; }
     }
 
     .eco-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 22px;
+      border-radius: var(--radius-sm);
+      padding: 20px 22px;
     }
 
     .eco-title {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
       color: #fff;
       margin-bottom: 8px;
@@ -403,18 +598,23 @@
       line-height: 1.65;
     }
 
+    /* ── DIVIDER ── */
+    .divider {
+      max-width: var(--max-width);
+      margin: 0 auto 60px;
+      padding: 0 28px;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
-      padding: 36px 28px;
+      padding: 32px 28px;
       text-align: center;
     }
 
-    footer p {
-      font-size: 13px;
-      color: var(--text-faint);
-    }
-
+    footer p { font-size: 13px; color: var(--text-faint); }
     footer a { color: var(--text-muted); transition: color 0.15s; }
     footer a:hover { color: var(--text); text-decoration: none; }
   </style>
@@ -437,195 +637,536 @@
   <!-- HERO -->
   <section class="hero">
     <span class="hero-eyebrow">Open Source</span>
-    <h1>AI-native<br><span>developer tooling</span></h1>
-    <p>Infrastructure, agents, and games at the frontier of human-AI collaboration.</p>
+    <h1>Projects by 7ports</h1>
+    <p>AI-native developer tooling, games, and apps.</p>
     <div class="hero-cta">
-      <a href="https://github.com/7ports" class="btn btn-primary">View on GitHub</a>
+      <a href="https://github.com/7ports" class="btn btn-primary">GitHub</a>
       <a href="https://7ports.github.io/project-voltron/" class="btn btn-ghost">Voltron Docs</a>
       <a href="https://7ports.github.io/project-alexandria/" class="btn btn-ghost">Alexandria Docs</a>
     </div>
   </section>
 
-  <!-- PROJECTS -->
-  <div class="section-wrap" id="projects">
-    <div class="section-header">
-      <p class="section-label">Open Source Projects</p>
-      <h2>Projects</h2>
-    </div>
-    <div class="project-grid">
-
-      <!-- VOLTRON -->
-      <div class="project-card">
-        <div class="card-top">
-          <div>
-            <div class="project-name">Project Voltron</div>
-            <div class="project-tagline">MCP server · Claude Code agent teams</div>
-          </div>
-          <span class="project-type type-mcp">MCP Server</span>
-        </div>
-        <p class="project-description">
-          Scaffold any project with battle-tested subagent definitions for Claude Code. Voltron provides a coordinated team of specialists — a scrum-master that decomposes work, a project-planner that designs architecture, and domain experts that implement it. Specialist agents run in Docker containers for blast-radius isolation, and the whole system self-improves through post-session reflections.
-        </p>
-        <ul class="feature-list">
-          <li>11 specialist agents spanning Unity, web/fullstack, and general software development</li>
-          <li>Self-improving: post-session reflections feed a GitHub Actions pipeline (Mon/Wed/Fri) that patches templates and opens PRs for review</li>
-          <li>Auto-update hook silently upgrades installed agent files at the start of every session</li>
-          <li>Real-time progress dashboard with Chrome MCP integration — opens and focuses automatically when work begins</li>
-          <li>Integrates with Project Alexandria — agents consult the shared knowledge base before any tool installation (mandatory)</li>
-        </ul>
-        <div class="tech-tags">
-          <span class="tech-tag">Node.js</span>
-          <span class="tech-tag">MCP SDK</span>
-          <span class="tech-tag">Docker</span>
-          <span class="tech-tag">GitHub Actions</span>
-          <span class="tech-tag">Claude Code</span>
-          <span class="tech-tag">Cloudflare Workers</span>
-        </div>
-        <div class="card-footer">
-          <div class="card-links">
-            <a href="https://github.com/7ports/project-voltron" class="card-link">GitHub →</a>
-            <a href="https://7ports.github.io/project-voltron/" class="card-link">Docs →</a>
-          </div>
-          <span class="status-badge"><span class="status-dot dot-stable"></span> v2.3.8 · Stable</span>
-        </div>
-      </div>
-
-      <!-- ALEXANDRIA -->
-      <div class="project-card">
-        <div class="card-top">
-          <div>
-            <div class="project-name">Project Alexandria</div>
-            <div class="project-tagline">Shared knowledge base · all Claude instances</div>
-          </div>
-          <span class="project-type type-knowledge">Knowledge Base</span>
-        </div>
-        <p class="project-description">
-          A collaboratively maintained library of tooling setup guides shared across Claude instances via MCP. Every Claude instance with Alexandria installed becomes both a consumer and a contributor — when one instance sets up a tool and documents the process, every other instance benefits. Setup knowledge accumulates across projects and sessions instead of being rediscovered from scratch.
-        </p>
-        <ul class="feature-list">
-          <li>Agents call <code>quick_setup</code> before any tool install — mandatory, not optional; <code>update_guide</code> after completion</li>
-          <li>13+ guides: Git, GitHub, Firebase, AWS CLI, Claude in Chrome, Claude Preview, Beads, Memory MCP, CoPlay, and more</li>
-          <li>Strict content boundary — only non-project-specific, reusable knowledge belongs here; project-specific decisions stay in <code>CLAUDE.md</code></li>
-          <li>No database, no external dependencies — plain markdown files readable by humans and Claude alike</li>
-          <li>Companion to Voltron — all Voltron agents reference Alexandria; <code>scrum-master</code> calls <code>get_project_setup_recommendations</code> on every new project</li>
-        </ul>
-        <div class="tech-tags">
-          <span class="tech-tag">Node.js</span>
-          <span class="tech-tag">MCP SDK</span>
-          <span class="tech-tag">Markdown</span>
-          <span class="tech-tag">Claude Code</span>
-        </div>
-        <div class="card-footer">
-          <div class="card-links">
-            <a href="https://github.com/7ports/project-alexandria" class="card-link">GitHub →</a>
-            <a href="https://7ports.github.io/project-alexandria/" class="card-link">Docs →</a>
-          </div>
-          <span class="status-badge"><span class="status-dot dot-active"></span> Active</span>
-        </div>
-      </div>
-
-      <!-- PEPPER -->
-      <div class="project-card">
-        <div class="card-top">
-          <div>
-            <div class="project-name">Project Pepper</div>
-            <div class="project-tagline">2D card game · Unity 6 · WebGL</div>
-          </div>
-          <span class="project-type type-game">Unity Game</span>
-        </div>
-        <p class="project-description">
-          A strategic 2D card game built in Unity 6 for WebGL. Players compete on a 4×4 grid using a hand of cards — each card has unique effects that alter the board state. Three AI difficulty levels challenge players as they try to claim four in a row on the expanded grid. Firebase Analytics tracks all major gameplay events via a custom JavaScript bridge.
-        </p>
-        <ul class="feature-list">
-          <li>Hand-of-cards mechanic on a 4×4 Tic-Tac-Toe grid — cards as ScriptableObjects, each with distinct board effects</li>
-          <li>Three AI opponent difficulty levels (Easy / Medium / Hard) with distinct decision-making strategies</li>
-          <li>Firebase Analytics via custom JS bridge: <code>FirebaseWebGL.cs</code> → <code>FirebaseAnalytics.jslib</code> → browser Firebase SDK — fully WebGL-compatible, guarded with <code>#if UNITY_WEBGL && !UNITY_EDITOR</code></li>
-          <li>Universal Render Pipeline (URP) with custom sprite materials; TextMesh Pro for all UI text</li>
-          <li>Full Voltron agent team: scrum-master · csharp-dev · scene-architect · shader-artist · build-validator · asset-manager</li>
-        </ul>
-        <div class="tech-tags">
-          <span class="tech-tag">Unity 6</span>
-          <span class="tech-tag">C#</span>
-          <span class="tech-tag">WebGL</span>
-          <span class="tech-tag">URP</span>
-          <span class="tech-tag">Firebase</span>
-          <span class="tech-tag">JavaScript</span>
-        </div>
-        <div class="card-footer">
-          <div class="card-links">
-            <a href="https://github.com/7ports/project-pepper" class="card-link">GitHub →</a>
-          </div>
-          <span class="status-badge"><span class="status-dot dot-alpha"></span> Alpha</span>
-        </div>
-      </div>
-
-      <!-- HAMMER -->
-      <div class="project-card">
-        <div class="card-top">
-          <div>
-            <div class="project-name">Project Hammer</div>
-            <div class="project-tagline">Real-time ferry tracker · Toronto Harbour</div>
-          </div>
-          <span class="project-type type-web">Web App</span>
-        </div>
-        <p class="project-description">
-          Real-time map showing Toronto Island Ferry positions using live AIS vessel data. A Node.js backend on Fly.io proxies the aisstream.io WebSocket (which blocks direct browser connections) and relays position updates as SSE. The React PWA renders ferries gliding across the harbour with 60fps smooth interpolation via <code>lerp()</code> + <code>requestAnimationFrame</code>.
-        </p>
-        <ul class="feature-list">
-          <li>Live AIS position tracking for all four Toronto Island Ferry vessels (Sam McBride, Wm Inglis, Thomas Rennie, Marilyn Bell I) filtered by MMSI</li>
-          <li>SSE over WebSocket relay — <code>EventSource</code> auto-reconnects, no client-side WebSocket library needed; unidirectional AIS data is a perfect fit</li>
-          <li>60fps smooth vessel movement interpolating between ~10s AIS ping intervals using <code>lerp()</code> + <code>requestAnimationFrame</code></li>
-          <li>MapLibre GL JS v5 + react-map-gl v8 + MapTiler Ocean chart style — fully open source, no proprietary map SDK lock-in</li>
-          <li>Full production infrastructure: Terraform (S3 + CloudFront + ACM + Route53) · Fly.io yyz region · GitHub Actions CI/CD · PWA with service worker</li>
-        </ul>
-        <div class="tech-tags">
-          <span class="tech-tag">React 18</span>
-          <span class="tech-tag">TypeScript</span>
-          <span class="tech-tag">MapLibre GL JS</span>
-          <span class="tech-tag">Node.js</span>
-          <span class="tech-tag">Express 5</span>
-          <span class="tech-tag">Fly.io</span>
-          <span class="tech-tag">AWS</span>
-          <span class="tech-tag">Terraform</span>
-          <span class="tech-tag">Vite</span>
-          <span class="tech-tag">PWA</span>
-        </div>
-        <div class="card-footer">
-          <div class="card-links">
-            <a href="https://github.com/7ports/project-hammer" class="card-link">GitHub →</a>
-          </div>
-          <span class="status-badge"><span class="status-dot dot-prototype"></span> Prototype</span>
-        </div>
-      </div>
-
-    </div>
+  <!-- PROJECT LIST -->
+  <div class="section-header-row" id="projects">
+    <p class="section-label">Open Source</p>
+    <h2>Projects</h2>
   </div>
 
-  <hr class="section-divider">
+  <div class="projects-list">
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- PROJECT VOLTRON                                -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div class="project">
+      <div class="project-header">
+        <div class="project-header-left">
+          <div class="project-name-row">
+            <span class="project-name">Project Voltron</span>
+            <span class="project-type type-mcp">MCP Server</span>
+          </div>
+          <div class="project-tagline">Specialized agent teams for Claude Code</div>
+          <div class="status-badge">
+            <span class="status-dot dot-stable"></span>
+            v2.3.8 · Stable
+          </div>
+        </div>
+        <div class="project-header-right">
+          <div class="header-links">
+            <a href="https://github.com/7ports/project-voltron" class="btn btn-ghost">GitHub</a>
+            <a href="https://7ports.github.io/project-voltron/" class="btn btn-docs">Docs</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- MEDIA: terminal showing scaffold + progress -->
+      <div class="project-media">
+        <div class="media-grid media-grid-2">
+          <div class="terminal-preview">
+            <div class="terminal-bar">
+              <span class="terminal-dot td-red"></span>
+              <span class="terminal-dot td-amber"></span>
+              <span class="terminal-dot td-green"></span>
+              <span class="terminal-title">scaffold_project · web</span>
+            </div>
+            <div class="terminal-body">
+              <div><span class="dim">$</span> <span class="green">scaffold_project</span>({ project_type: <span class="amber">"web"</span> })</div>
+              <div>&nbsp;</div>
+              <div><span class="green">✓</span> Scaffolded <span class="purple">11 agent files</span> into .claude/agents/</div>
+              <div><span class="green">✓</span> Wrote <span class="blue">Dockerfile.voltron</span></div>
+              <div><span class="green">✓</span> Wrote <span class="blue">scripts/voltron-run.sh</span></div>
+              <div><span class="green">✓</span> Added <span class="blue">auto-update hook</span> to .claude/settings.json</div>
+              <div>&nbsp;</div>
+              <div><span class="dim">Agents ready:</span></div>
+              <div>  <span class="purple">scrum-master</span> · <span class="purple">project-planner</span></div>
+              <div>  <span class="blue">fullstack-dev</span> · <span class="blue">devops-engineer</span></div>
+              <div>  <span class="blue">ui-designer</span> · <span class="blue">qa-tester</span></div>
+              <div>&nbsp;</div>
+              <div><span class="dim">Next:</span> Fill in CLAUDE.md, then invoke @agent-scrum-master</div>
+            </div>
+          </div>
+          <div class="terminal-preview">
+            <div class="terminal-bar">
+              <span class="terminal-dot td-red"></span>
+              <span class="terminal-dot td-amber"></span>
+              <span class="terminal-dot td-green"></span>
+              <span class="terminal-title">get_progress · live dashboard</span>
+            </div>
+            <div class="terminal-body">
+              <div><span class="amber">Sprint: Phase 3 — Information Panel</span></div>
+              <div>&nbsp;</div>
+              <div><span class="green">●</span> <span class="green">DONE</span>  Map foundation &amp; AIS hooks</div>
+              <div><span class="green">●</span> <span class="green">DONE</span>  Backend SSE proxy on Fly.io</div>
+              <div><span class="blue">●</span> <span class="blue">ACTIVE</span> VesselCard + live service status</div>
+              <div><span class="dim">●</span> <span class="dim">QUEUE</span> ScheduleView component</div>
+              <div><span class="dim">●</span> <span class="dim">QUEUE</span> WeatherStrip integration</div>
+              <div><span class="dim">●</span> <span class="dim">QUEUE</span> MobileDrawer + AppShell</div>
+              <div>&nbsp;</div>
+              <div><span class="dim">Agents:</span> fullstack-dev <span class="blue">↑ in Docker</span></div>
+              <div><span class="dim">Dashboard:</span> <span class="purple">file:///…/.voltron/dashboard.html</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BODY -->
+      <div class="project-body">
+        <div>
+          <p class="project-description">
+            Voltron is an MCP server that gives Claude Code a coordinated team of specialist subagents. A scrum-master decomposes work, a project-planner designs architecture, and domain experts implement — each running in its own Docker container. Agents self-improve through a feedback loop: post-session reflections accumulate and a GitHub Actions workflow applies targeted improvements to the templates three times a week, opening PRs for review before anything reaches <code>main</code>.
+          </p>
+          <ul class="feature-list">
+            <li>11 specialist agents across Unity (scene-architect, csharp-dev, shader-artist, build-validator, asset-manager) and web/fullstack (fullstack-dev, devops-engineer, ui-designer, qa-tester)</li>
+            <li>Self-improving reflection loop — scrum-master submits post-session feedback automatically; GitHub Actions (Mon/Wed/Fri 10:00 UTC) patches templates and opens a PR</li>
+            <li>Auto-update hook silently upgrades installed agent files, Dockerfile, and run script at the start of every session</li>
+            <li>Real-time progress dashboard with Chrome MCP integration — tab opens and refocuses automatically when work begins</li>
+            <li>Integrates with Project Alexandria — all agents call <code>quick_setup</code> before any tool installation; mandatory, not optional</li>
+          </ul>
+        </div>
+        <div class="project-sidebar">
+          <div class="sidebar-section">
+            <div class="sidebar-label">Tech Stack</div>
+            <div class="tech-tags">
+              <span class="tech-tag">Node.js</span>
+              <span class="tech-tag">MCP SDK</span>
+              <span class="tech-tag">Docker</span>
+              <span class="tech-tag">GitHub Actions</span>
+              <span class="tech-tag">Claude Code</span>
+              <span class="tech-tag">Cloudflare Workers</span>
+            </div>
+          </div>
+          <div class="sidebar-section">
+            <div class="sidebar-label">Links</div>
+            <div class="sidebar-links">
+              <a href="https://github.com/7ports/project-voltron" class="sidebar-link-btn">
+                <span class="link-icon">&#128196;</span>
+                <span class="link-label">Source on GitHub</span>
+                <span class="link-arrow">→</span>
+              </a>
+              <a href="https://7ports.github.io/project-voltron/" class="sidebar-link-btn link-docs">
+                <span class="link-icon">&#128218;</span>
+                <span class="link-label">Documentation</span>
+                <span class="link-arrow">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- PROJECT ALEXANDRIA                             -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div class="project">
+      <div class="project-header">
+        <div class="project-header-left">
+          <div class="project-name-row">
+            <span class="project-name">Project Alexandria</span>
+            <span class="project-type type-knowledge">Knowledge Base</span>
+          </div>
+          <div class="project-tagline">Shared tooling guides across all Claude instances</div>
+          <div class="status-badge">
+            <span class="status-dot dot-active"></span>
+            Active
+          </div>
+        </div>
+        <div class="project-header-right">
+          <div class="header-links">
+            <a href="https://github.com/7ports/project-alexandria" class="btn btn-ghost">GitHub</a>
+            <a href="https://7ports.github.io/project-alexandria/" class="btn btn-docs">Docs</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- MEDIA: guide browser preview -->
+      <div class="project-media">
+        <div class="media-grid media-grid-2">
+          <div class="terminal-preview">
+            <div class="terminal-bar">
+              <span class="terminal-dot td-red"></span>
+              <span class="terminal-dot td-amber"></span>
+              <span class="terminal-dot td-green"></span>
+              <span class="terminal-title">quick_setup · firebase-mcp</span>
+            </div>
+            <div class="terminal-body">
+              <div><span class="dim">$</span> <span class="green">quick_setup</span>({ tool: <span class="amber">"firebase-mcp"</span> })</div>
+              <div>&nbsp;</div>
+              <div><span class="amber">## Firebase MCP Server — Quick Setup</span></div>
+              <div>&nbsp;</div>
+              <div><span class="blue">### Installation</span></div>
+              <div>npx @firebase/mcp</div>
+              <div>&nbsp;</div>
+              <div><span class="blue">### Config (~/.claude.json)</span></div>
+              <div><span class="dim">{</span> <span class="amber">"firebase"</span>: <span class="dim">{</span></div>
+              <div>  <span class="amber">"command"</span>: <span class="green">"npx"</span>,</div>
+              <div>  <span class="amber">"args"</span>: [<span class="green">"@firebase/mcp"</span>]</div>
+              <div><span class="dim">}}</span></div>
+              <div>&nbsp;</div>
+              <div><span class="blue">### Known issues</span></div>
+              <div><span class="dim">- Requires firebase login first</span></div>
+              <div><span class="dim">- Node 18+ required</span></div>
+            </div>
+          </div>
+          <div class="terminal-preview">
+            <div class="terminal-bar">
+              <span class="terminal-dot td-red"></span>
+              <span class="terminal-dot td-amber"></span>
+              <span class="terminal-dot td-green"></span>
+              <span class="terminal-title">list_guides</span>
+            </div>
+            <div class="terminal-body">
+              <div><span class="dim">$</span> <span class="green">list_guides</span>()</div>
+              <div>&nbsp;</div>
+              <div><span class="purple">13 guides available</span></div>
+              <div>&nbsp;</div>
+              <div><span class="green">alexandria-mcp-server</span>   MCP server setup &amp; maint.</div>
+              <div><span class="green">aws-cli</span>                  AWS CLI config &amp; auth</div>
+              <div><span class="green">beads</span>                    Distributed issue tracker</div>
+              <div><span class="green">claude-code-github-actions</span> CI integration</div>
+              <div><span class="green">claude-in-chrome</span>         Browser automation</div>
+              <div><span class="green">claude-preview</span>           Dev server inspection</div>
+              <div><span class="green">coplay-mcp-server</span>        Unity editor via MCP</div>
+              <div><span class="green">fetch-mcp-server</span>         Web content fetching</div>
+              <div><span class="green">firebase-mcp-server</span>      Firebase project mgmt</div>
+              <div><span class="green">git-mcp-server</span>           Git operations via MCP</div>
+              <div><span class="green">github-cli</span>               gh CLI setup</div>
+              <div><span class="green">github-mcp-server</span>        GitHub API access</div>
+              <div><span class="green">memory-mcp-server</span>        Knowledge graph memory</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-body">
+        <div>
+          <p class="project-description">
+            Alexandria is a collaboratively maintained library of tooling setup guides shared across Claude instances via MCP. Every Claude instance that has Alexandria installed becomes both a consumer and a contributor. When one instance sets up a tool and documents the process, every other instance benefits — error/fix pairs, platform quirks, version notes, and working commands accumulate across sessions instead of being rediscovered from scratch every time.
+          </p>
+          <ul class="feature-list">
+            <li>Agents call <code>quick_setup</code> before any tool installation — mandatory, not optional; they call <code>update_guide</code> after completing setup to document what they learned</li>
+            <li>13+ guides covering Git, GitHub, Firebase, AWS CLI, Claude in Chrome, Claude Preview, Beads, Memory MCP, CoPlay, and more</li>
+            <li>Strict content boundary — only non-project-specific, reusable knowledge; project-specific decisions stay in <code>CLAUDE.md</code></li>
+            <li>No database, no external dependencies — guides are plain markdown files readable and editable by both humans and Claude</li>
+            <li>Companion to Voltron — all Voltron agents reference Alexandria; <code>scrum-master</code> calls <code>get_project_setup_recommendations</code> when starting any new project</li>
+          </ul>
+        </div>
+        <div class="project-sidebar">
+          <div class="sidebar-section">
+            <div class="sidebar-label">Tech Stack</div>
+            <div class="tech-tags">
+              <span class="tech-tag">Node.js</span>
+              <span class="tech-tag">MCP SDK</span>
+              <span class="tech-tag">Markdown</span>
+              <span class="tech-tag">Claude Code</span>
+            </div>
+          </div>
+          <div class="sidebar-section">
+            <div class="sidebar-label">Links</div>
+            <div class="sidebar-links">
+              <a href="https://github.com/7ports/project-alexandria" class="sidebar-link-btn">
+                <span class="link-icon">&#128196;</span>
+                <span class="link-label">Source on GitHub</span>
+                <span class="link-arrow">→</span>
+              </a>
+              <a href="https://7ports.github.io/project-alexandria/" class="sidebar-link-btn link-docs">
+                <span class="link-icon">&#128218;</span>
+                <span class="link-label">Documentation</span>
+                <span class="link-arrow">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- PROJECT PEPPER                                 -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div class="project">
+      <div class="project-header">
+        <div class="project-header-left">
+          <div class="project-name-row">
+            <span class="project-name">Project Pepper</span>
+            <span class="project-type type-game">Unity Game</span>
+          </div>
+          <div class="project-tagline">2D strategic card game for WebGL</div>
+          <div class="status-badge">
+            <span class="status-dot dot-alpha"></span>
+            Alpha
+          </div>
+        </div>
+        <div class="project-header-right">
+          <div class="header-links">
+            <a href="https://7ports.itch.io/project-pepper" class="btn btn-play">Play on itch.io</a>
+            <a href="https://github.com/7ports/project-pepper" class="btn btn-ghost">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- MEDIA: actual game sprites from the repo -->
+      <div class="project-media">
+        <div class="media-grid media-grid-3">
+          <div class="media-frame">
+            <img
+              src="https://raw.githubusercontent.com/7ports/project-pepper/main/Assets/Sprites/4x4%20xo%201.png"
+              alt="Project Pepper — 4x4 game board screenshot"
+              loading="lazy"
+            >
+          </div>
+          <div class="media-frame">
+            <img
+              src="https://raw.githubusercontent.com/7ports/project-pepper/main/Assets/Sprites/4x4%20xo.png"
+              alt="Project Pepper — game board state"
+              loading="lazy"
+            >
+          </div>
+          <div class="media-frame">
+            <img
+              src="https://raw.githubusercontent.com/7ports/project-pepper/main/Assets/Sprites/tictactoeboard.png"
+              alt="Project Pepper — game board sprite"
+              loading="lazy"
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="project-body">
+        <div>
+          <p class="project-description">
+            A strategic 2D card game built in Unity 6 for WebGL. Players compete on a 4×4 grid using a hand of cards — each card has unique effects that alter the board state. Three AI difficulty levels (Easy, Medium, Hard) challenge players as they try to claim four in a row. Firebase Analytics tracks all major gameplay events via a custom JavaScript bridge that connects Unity C# to the browser Firebase SDK, fully guarded for WebGL-only execution.
+          </p>
+          <ul class="feature-list">
+            <li>Hand-of-cards mechanic layered over a 4×4 Tic-Tac-Toe grid — cards are ScriptableObjects, each with distinct board effects that create strategic depth</li>
+            <li>Three AI difficulty levels (Easy / Medium / Hard) with distinct decision-making strategies and evaluation heuristics</li>
+            <li>Firebase Analytics via custom JS bridge: <code>FirebaseWebGL.cs</code> → <code>FirebaseAnalytics.jslib</code> → browser Firebase JS SDK — correctly guarded with <code>#if UNITY_WEBGL &amp;&amp; !UNITY_EDITOR</code> throughout</li>
+            <li>Universal Render Pipeline (URP) v17.2 with custom sprite materials; TextMesh Pro for all UI text; singleton-based controller architecture</li>
+            <li>Fully managed by the Voltron agent team: scrum-master · csharp-dev · scene-architect · shader-artist · build-validator · asset-manager</li>
+          </ul>
+        </div>
+        <div class="project-sidebar">
+          <div class="sidebar-section">
+            <div class="sidebar-label">Tech Stack</div>
+            <div class="tech-tags">
+              <span class="tech-tag">Unity 6</span>
+              <span class="tech-tag">C#</span>
+              <span class="tech-tag">WebGL</span>
+              <span class="tech-tag">URP</span>
+              <span class="tech-tag">Firebase</span>
+              <span class="tech-tag">JavaScript</span>
+            </div>
+          </div>
+          <div class="sidebar-section">
+            <div class="sidebar-label">Play &amp; Source</div>
+            <div class="sidebar-links">
+              <a href="https://7ports.itch.io/project-pepper" class="sidebar-link-btn link-play">
+                <span class="link-icon">&#127918;</span>
+                <span class="link-label">Play on itch.io</span>
+                <span class="link-arrow">→</span>
+              </a>
+              <a href="https://github.com/7ports/project-pepper" class="sidebar-link-btn">
+                <span class="link-icon">&#128196;</span>
+                <span class="link-label">Source on GitHub</span>
+                <span class="link-arrow">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- PROJECT HAMMER                                 -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div class="project">
+      <div class="project-header">
+        <div class="project-header-left">
+          <div class="project-name-row">
+            <span class="project-name">Project Hammer</span>
+            <span class="project-type type-web">Web App</span>
+          </div>
+          <div class="project-tagline">Real-time Toronto Island Ferry tracker</div>
+          <div class="status-badge">
+            <span class="status-dot dot-prototype"></span>
+            Prototype
+          </div>
+        </div>
+        <div class="project-header-right">
+          <div class="header-links">
+            <a href="https://ferries.yyz.live" class="btn btn-live">ferries.yyz.live</a>
+            <a href="https://github.com/7ports/project-hammer" class="btn btn-ghost">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- MEDIA: map preview illustration + stack overview -->
+      <div class="project-media">
+        <div class="media-grid media-grid-2">
+          <!-- SVG map illustration -->
+          <div class="map-preview" style="min-height:220px; display:flex; align-items:center; justify-content:center; padding: 20px;">
+            <svg viewBox="0 0 480 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:220px;">
+              <!-- Water background -->
+              <rect width="480" height="240" fill="#081828"/>
+              <!-- Grid lines (nautical chart style) -->
+              <g stroke="#0d2a42" stroke-width="0.8">
+                <line x1="0" y1="60" x2="480" y2="60"/>
+                <line x1="0" y1="120" x2="480" y2="120"/>
+                <line x1="0" y1="180" x2="480" y2="180"/>
+                <line x1="120" y1="0" x2="120" y2="240"/>
+                <line x1="240" y1="0" x2="240" y2="240"/>
+                <line x1="360" y1="0" x2="360" y2="240"/>
+              </g>
+              <!-- Mainland shore -->
+              <path d="M0 60 Q80 50 160 55 Q240 48 320 52 Q400 46 480 58 L480 0 L0 0 Z" fill="#0f2030" stroke="#1a3a55" stroke-width="1"/>
+              <!-- Toronto Island -->
+              <path d="M120 160 Q160 148 210 152 Q260 148 300 158 Q320 168 300 178 Q260 188 210 184 Q160 186 130 176 Z" fill="#0f2030" stroke="#1a3a55" stroke-width="1"/>
+              <!-- Ferry terminal dock (mainland) -->
+              <rect x="228" y="58" width="24" height="8" fill="#1a3a55" rx="2"/>
+              <text x="240" y="52" fill="#3a6a8a" font-size="9" text-anchor="middle" font-family="monospace">Jack Layton</text>
+              <!-- Island dock -->
+              <rect x="228" y="148" width="24" height="8" fill="#1a3a55" rx="2"/>
+              <text x="240" y="144" fill="#3a6a8a" font-size="9" text-anchor="middle" font-family="monospace">Ward's Island</text>
+              <!-- Ferry vessel 1 (animated position) -->
+              <g transform="translate(220, 95)">
+                <ellipse cx="0" cy="0" rx="10" ry="5" fill="#60a5fa" opacity="0.9"/>
+                <ellipse cx="0" cy="0" rx="10" ry="5" fill="none" stroke="#93c5fd" stroke-width="1"/>
+                <!-- Wake trail -->
+                <path d="M10 0 Q20 3 30 1" stroke="#60a5fa" stroke-width="1.5" fill="none" opacity="0.4"/>
+                <path d="M10 0 Q20 -3 30 -1" stroke="#60a5fa" stroke-width="1.5" fill="none" opacity="0.4"/>
+              </g>
+              <!-- Ferry vessel 2 -->
+              <g transform="translate(260, 118)">
+                <ellipse cx="0" cy="0" rx="10" ry="5" fill="#34d399" opacity="0.8"/>
+                <ellipse cx="0" cy="0" rx="10" ry="5" fill="none" stroke="#6ee7b7" stroke-width="1"/>
+              </g>
+              <!-- Label -->
+              <text x="24" y="220" fill="#1a3a55" font-size="9" font-family="monospace">Toronto Harbour — Live AIS</text>
+              <!-- Pulse ring on vessel 1 -->
+              <circle cx="220" cy="95" r="16" fill="none" stroke="#60a5fa" stroke-width="1" opacity="0.3"/>
+            </svg>
+          </div>
+          <div class="terminal-preview">
+            <div class="terminal-bar">
+              <span class="terminal-dot td-red"></span>
+              <span class="terminal-dot td-amber"></span>
+              <span class="terminal-dot td-green"></span>
+              <span class="terminal-title">AIS stream · SSE relay</span>
+            </div>
+            <div class="terminal-body">
+              <div><span class="dim"># aisstream.io WebSocket → SSE relay</span></div>
+              <div>&nbsp;</div>
+              <div><span class="green">GET</span> /api/ais/stream  <span class="dim">(EventSource)</span></div>
+              <div>&nbsp;</div>
+              <div><span class="amber">data:</span> <span class="dim">{</span></div>
+              <div>  <span class="amber">"mmsi"</span>: <span class="green">316045069</span>,</div>
+              <div>  <span class="amber">"name"</span>: <span class="green">"SAM MCBRIDE"</span>,</div>
+              <div>  <span class="amber">"lat"</span>: <span class="blue">43.6395</span>,</div>
+              <div>  <span class="amber">"lon"</span>: <span class="blue">-79.3762</span>,</div>
+              <div>  <span class="amber">"cog"</span>: <span class="blue">187.4</span>,</div>
+              <div>  <span class="amber">"sog"</span>: <span class="blue">8.2</span></div>
+              <div><span class="dim">}</span></div>
+              <div>&nbsp;</div>
+              <div><span class="dim"># lerp() + rAF → 60fps smooth movement</span></div>
+              <div><span class="dim"># ~10s AIS ping interval interpolated</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-body">
+        <div>
+          <p class="project-description">
+            Real-time map showing Toronto Island Ferry positions using live AIS vessel data from aisstream.io. A Node.js backend on Fly.io (Toronto region) proxies the AIS WebSocket — which blocks direct browser connections — and relays vessel position updates as Server-Sent Events. The React PWA renders ferries gliding across the harbour with smooth 60fps interpolation between the ~10-second AIS ping intervals.
+          </p>
+          <ul class="feature-list">
+            <li>Live AIS tracking for all four Toronto Island Ferry vessels by MMSI: Sam McBride · Wm Inglis · Thomas Rennie · Marilyn Bell I</li>
+            <li>SSE relay over WebSocket — <code>EventSource</code> auto-reconnects, no client-side WebSocket library; unidirectional AIS data is a natural fit for SSE</li>
+            <li>60fps smooth vessel movement with position interpolation between AIS pings using <code>lerp()</code> + <code>requestAnimationFrame</code></li>
+            <li>MapLibre GL JS v5 + react-map-gl v8 + MapTiler Ocean chart style — fully open source, no proprietary map SDK lock-in</li>
+            <li>Full production infrastructure: Terraform (S3 + CloudFront + ACM + Route53) · Fly.io yyz region · GitHub Actions CI/CD · PWA with service worker</li>
+          </ul>
+        </div>
+        <div class="project-sidebar">
+          <div class="sidebar-section">
+            <div class="sidebar-label">Tech Stack</div>
+            <div class="tech-tags">
+              <span class="tech-tag">React 18</span>
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">MapLibre GL JS</span>
+              <span class="tech-tag">Node.js</span>
+              <span class="tech-tag">Express 5</span>
+              <span class="tech-tag">Fly.io</span>
+              <span class="tech-tag">AWS</span>
+              <span class="tech-tag">Terraform</span>
+              <span class="tech-tag">Vite</span>
+              <span class="tech-tag">PWA</span>
+            </div>
+          </div>
+          <div class="sidebar-section">
+            <div class="sidebar-label">Live &amp; Source</div>
+            <div class="sidebar-links">
+              <a href="https://ferries.yyz.live" class="sidebar-link-btn link-live">
+                <span class="link-icon">&#128506;</span>
+                <span class="link-label">ferries.yyz.live</span>
+                <span class="link-arrow">→</span>
+              </a>
+              <a href="https://github.com/7ports/project-hammer" class="sidebar-link-btn">
+                <span class="link-icon">&#128196;</span>
+                <span class="link-label">Source on GitHub</span>
+                <span class="link-arrow">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /projects-list -->
+
+  <hr class="divider">
 
   <!-- ECOSYSTEM -->
-  <div class="section-wrap" id="ecosystem">
-    <div class="section-header">
+  <div class="ecosystem-wrap" id="ecosystem">
+    <div class="section-header-row" style="padding-left:0;padding-right:0;">
       <p class="section-label">How it fits together</p>
       <h2>The Ecosystem</h2>
     </div>
-    <div class="ecosystem-grid">
+    <br>
+    <div class="eco-grid">
       <div class="eco-card">
         <div class="eco-title">Voltron + Alexandria</div>
         <p class="eco-desc">
-          The two MCP servers are designed to work together. Voltron provides the agent team; Alexandria provides the knowledge base. Every Voltron agent is required to call <code>quick_setup</code> before installing any tool. After setup, they call <code>update_guide</code>. Tool knowledge flows from sessions back into Alexandria for every future project.
+          The two MCP servers are designed to work together. Voltron provides the agent team; Alexandria provides the knowledge base. Every Voltron agent calls <code>quick_setup</code> before installing any tool. After setup, they call <code>update_guide</code>. Tool knowledge flows from sessions into Alexandria for every future project.
         </p>
       </div>
       <div class="eco-card">
-        <div class="eco-title">Voltron + Projects</div>
+        <div class="eco-title">Voltron in Production</div>
         <p class="eco-desc">
-          Project Pepper (Unity) and Project Hammer (web) are both developed using the full Voltron agent workflow — scrum-master for planning, domain specialists for implementation, all coordinated via the progress dashboard. They serve as real-world validation for the agent templates.
+          Project Pepper and Project Hammer are both developed using the full Voltron workflow — scrum-master for planning, specialist agents in Docker for implementation, live progress dashboard for visibility. They serve as real-world validation for the agent templates and generate the reflections that feed the self-improvement loop.
         </p>
       </div>
       <div class="eco-card">
         <div class="eco-title">Self-Improving Loop</div>
         <p class="eco-desc">
-          Specialist agents submit post-session reflections at phase completion and session end. The scrum-master submits automatically. A GitHub Actions workflow processes reflections three times a week, applies targeted improvements to agent templates, and opens PRs for review — closing the loop between usage and improvement.
+          Specialist agents submit post-session reflections at phase completion and session end. A GitHub Actions workflow processes them three times a week (Mon/Wed/Fri at 10:00 UTC), applies targeted improvements to agent templates, and opens PRs for human review before anything reaches <code>main</code>.
         </p>
       </div>
     </div>
