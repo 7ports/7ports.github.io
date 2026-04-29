@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projects by 7ports</title>
-  <meta name="description" content="Projects by 7ports — AI-native developer tooling, games, and apps. Includes Project Voltron, Alexandria, Pepper, and Hammer.">
+  <meta name="description" content="Projects by 7ports — AI-native developer tooling, observability, games, and apps. Includes Voltron, Alexandria, Sauron, Helldiver, Hammer, and Pepper.">
   <meta property="og:title" content="Projects by 7ports">
-  <meta property="og:description" content="AI-native developer tooling, games, and apps.">
+  <meta property="og:description" content="AI-native developer tooling, observability, games, and apps.">
   <meta property="og:type" content="website">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -270,6 +270,8 @@
     .type-knowledge { background: rgba(16,185,129,0.11); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.25); }
     .type-game      { background: rgba(245,158,11,0.12); color: #fcd34d; border: 1px solid rgba(245,158,11,0.25); }
     .type-web       { background: rgba(37,99,235,0.13);  color: #93c5fd; border: 1px solid rgba(37,99,235,0.28); }
+    .type-infra     { background: rgba(244,63,94,0.12);  color: #fda4af; border: 1px solid rgba(244,63,94,0.28); }
+    .type-agents    { background: rgba(168,85,247,0.12); color: #d8b4fe; border: 1px solid rgba(168,85,247,0.28); }
 
     .project-tagline {
       font-size: 14px;
@@ -578,11 +580,13 @@
   <section class="hero">
     <span class="hero-eyebrow">Open Source</span>
     <h1>Projects by 7ports</h1>
-    <p>AI-native developer tooling, games, and apps.</p>
+    <p>AI-native developer tooling, observability, games, and apps.</p>
     <div class="hero-cta">
       <a href="https://github.com/7ports" class="btn btn-primary">GitHub</a>
-      <a href="https://7ports.github.io/project-voltron/" class="btn btn-ghost">Voltron Docs</a>
-      <a href="https://7ports.github.io/project-alexandria/" class="btn btn-ghost">Alexandria Docs</a>
+      <a href="https://7ports.github.io/project-voltron/" class="btn btn-ghost">Voltron</a>
+      <a href="https://7ports.github.io/project-alexandria/" class="btn btn-ghost">Alexandria</a>
+      <a href="https://7ports.github.io/project-sauron/" class="btn btn-ghost">Sauron</a>
+      <a href="https://7ports.github.io/project-helldiver/" class="btn btn-ghost">Helldiver</a>
     </div>
   </section>
 
@@ -601,8 +605,8 @@
             <span class="project-name">Project Voltron</span>
             <span class="project-type type-mcp">MCP Server</span>
           </div>
-          <div class="project-tagline">Specialized agent teams for Claude Code</div>
-          <div class="status-badge"><span class="status-dot dot-stable"></span> v2.3.8 · Stable</div>
+          <div class="project-tagline">Specialized agent teams for Claude Code — Unity, web, mobile, and general software</div>
+          <div class="status-badge"><span class="status-dot dot-stable"></span> v3.3.6 · Stable</div>
         </div>
         <div class="project-header-right">
           <div class="header-links">
@@ -619,17 +623,18 @@
               <span class="terminal-title">scaffold_project · web</span>
             </div>
             <div class="terminal-body">
-              <div><span class="dim">$</span> <span class="green">scaffold_project</span>({ project_type: <span class="amber">"web"</span> })</div>
+              <div><span class="dim">$</span> <span class="green">scaffold_project</span>({ project_type: <span class="amber">"mobile"</span> })</div>
               <div>&nbsp;</div>
-              <div><span class="green">✓</span> Scaffolded <span class="purple">11 agent files</span> into .claude/agents/</div>
+              <div><span class="green">✓</span> Scaffolded <span class="purple">9 agent files</span> into .claude/agents/</div>
               <div><span class="green">✓</span> Wrote <span class="blue">Dockerfile.voltron</span></div>
               <div><span class="green">✓</span> Wrote <span class="blue">scripts/voltron-run.sh</span></div>
               <div><span class="green">✓</span> Added <span class="blue">auto-update hook</span> to .claude/settings.json</div>
               <div>&nbsp;</div>
               <div><span class="dim">Agents ready:</span></div>
               <div>  <span class="purple">scrum-master</span> · <span class="purple">project-planner</span></div>
-              <div>  <span class="blue">fullstack-dev</span> · <span class="blue">devops-engineer</span></div>
-              <div>  <span class="blue">ui-designer</span> · <span class="blue">qa-tester</span></div>
+              <div>  <span class="blue">ios-dev</span> · <span class="blue">android-dev</span> · <span class="blue">mobile-dev</span></div>
+              <div>  <span class="blue">mobile-ui-designer</span> · <span class="blue">mobile-qa-tester</span></div>
+              <div>  <span class="blue">app-store-publisher</span> · <span class="blue">researcher</span></div>
               <div>&nbsp;</div>
               <div><span class="dim">Next:</span> Fill in CLAUDE.md, then invoke @agent-scrum-master</div>
             </div>
@@ -661,10 +666,11 @@
             Voltron is an MCP server that gives Claude Code a coordinated team of specialist subagents. A scrum-master decomposes work, a project-planner designs architecture, and domain experts implement — each running in its own Docker container. Agents self-improve through a feedback loop: post-session reflections accumulate and a GitHub Actions workflow applies targeted improvements to the templates three times a week, opening PRs for review before anything reaches <code>main</code>.
           </p>
           <ul class="feature-list">
-            <li>11 specialist agents across Unity (scene-architect, csharp-dev, shader-artist, build-validator, asset-manager) and web/fullstack (fullstack-dev, devops-engineer, ui-designer, qa-tester)</li>
-            <li>Self-improving reflection loop — scrum-master submits post-session feedback automatically; GitHub Actions (Mon/Wed/Fri 10:00 UTC) patches templates and opens a PR</li>
-            <li>Auto-update hook silently upgrades installed agent files, Dockerfile, and run script at the start of every session</li>
-            <li>Real-time progress dashboard with Chrome MCP integration — tab opens and refocuses automatically when work begins</li>
+            <li>22 specialist agents + 30+ tier-1 sub-managers (Stringer micro-agents) across Unity, web/fullstack, mobile (iOS/Android/React Native), and general software</li>
+            <li>Mobile lineup — <code>ios-dev</code> (Swift/SwiftUI), <code>android-dev</code> (Kotlin/Compose), <code>mobile-dev</code> (React Native + Expo), plus <code>mobile-ui-designer</code>, <code>mobile-qa-tester</code>, and <code>app-store-publisher</code> (Fastlane + Match)</li>
+            <li>Self-improving reflection loop — agents submit post-session feedback automatically; GitHub Actions (Mon/Wed/Fri 10:00 UTC) patches templates and opens a PR for human review</li>
+            <li>Auto-update hook silently upgrades installed agent files, Dockerfile, and run script at the start of every session — <code>UserPromptSubmit</code> detects version mismatches and rewrites in place</li>
+            <li>Installable via APM (Anthropic Plugin Manager) or one-command <code>node scripts/setup.js</code> — registers the MCP server, allowlist, and Docker check globally</li>
             <li>Integrates with Project Alexandria — all agents call <code>quick_setup</code> before any tool installation; mandatory, not optional</li>
           </ul>
         </div>
@@ -673,7 +679,7 @@
             <div class="sidebar-label">Tech Stack</div>
             <div class="tech-tags">
               <span class="tech-tag">Node.js</span><span class="tech-tag">MCP SDK</span><span class="tech-tag">Docker</span>
-              <span class="tech-tag">GitHub Actions</span><span class="tech-tag">Claude Code</span><span class="tech-tag">Cloudflare Workers</span>
+              <span class="tech-tag">GitHub Actions</span><span class="tech-tag">Claude Code</span><span class="tech-tag">APM</span>
             </div>
           </div>
           <div class="sidebar-section">
@@ -743,21 +749,23 @@
             <div class="terminal-body">
               <div><span class="dim">$</span> <span class="green">list_guides</span>()</div>
               <div>&nbsp;</div>
-              <div><span class="purple">13 guides available</span></div>
+              <div><span class="purple">35 guides available</span></div>
               <div>&nbsp;</div>
-              <div><span class="green">alexandria-mcp-server</span>   MCP server setup &amp; maint.</div>
+              <div><span class="green">aisstream-io</span>             AIS vessel WebSocket feed</div>
               <div><span class="green">aws-cli</span>                  AWS CLI config &amp; auth</div>
               <div><span class="green">beads</span>                    Distributed issue tracker</div>
-              <div><span class="green">claude-code-github-actions</span> CI integration</div>
               <div><span class="green">claude-in-chrome</span>         Browser automation</div>
-              <div><span class="green">claude-preview</span>           Dev server inspection</div>
+              <div><span class="green">claude-preview-mcp-server</span> Dev server inspection</div>
               <div><span class="green">coplay-mcp-server</span>        Unity editor via MCP</div>
-              <div><span class="green">fetch-mcp-server</span>         Web content fetching</div>
-              <div><span class="green">firebase-mcp-server</span>      Firebase project mgmt</div>
-              <div><span class="green">git-mcp-server</span>           Git operations via MCP</div>
-              <div><span class="green">github-cli</span>               gh CLI setup</div>
-              <div><span class="green">github-mcp-server</span>        GitHub API access</div>
-              <div><span class="green">memory-mcp-server</span>        Knowledge graph memory</div>
+              <div><span class="green">express-5-node-typescript</span> Node API stack</div>
+              <div><span class="green">flyio-deployment</span>         Fly.io deploys</div>
+              <div><span class="green">github-actions-ec2-deploy</span> CI/CD to EC2</div>
+              <div><span class="green">loki-grafana-stack</span>       Logs &amp; dashboards</div>
+              <div><span class="green">maplibre-react-map-gl</span>    Open-source mapping</div>
+              <div><span class="green">prometheus-grafana-docker</span> Observability stack</div>
+              <div><span class="green">terraform-aws-ec2</span>        EC2 IaC</div>
+              <div><span class="green">vite-plugin-pwa</span>          PWA tooling</div>
+              <div><span class="dim">…and 21 more</span></div>
             </div>
           </div>
         </div>
@@ -769,7 +777,7 @@
           </p>
           <ul class="feature-list">
             <li>Agents call <code>quick_setup</code> before any tool installation — mandatory, not optional; they call <code>update_guide</code> after completing setup to document what they learned</li>
-            <li>13+ guides covering Git, GitHub, Firebase, AWS CLI, Claude in Chrome, Claude Preview, Beads, Memory MCP, CoPlay, and more</li>
+            <li>35+ guides covering AWS CLI, Terraform, Fly.io, Prometheus/Grafana, Loki, GitHub Actions EC2 deploys, MapLibre, Express 5, Vite PWA, Vitest, Supertest, Toronto Open Data, AIS streams, and the full MCP server lineup (Claude in Chrome, Claude Preview, CoPlay, Firebase, GitHub, Trello, Memory, Voltron, Alexandria itself)</li>
             <li>Strict content boundary — only non-project-specific, reusable knowledge; project-specific decisions stay in <code>CLAUDE.md</code></li>
             <li>No database, no external dependencies — guides are plain markdown files readable and editable by both humans and Claude</li>
             <li>Companion to Voltron — all Voltron agents reference Alexandria; <code>scrum-master</code> calls <code>get_project_setup_recommendations</code> when starting any new project</li>
@@ -790,6 +798,201 @@
                 <span class="link-icon">&#128196;</span><span class="link-label">Source on GitHub</span><span class="link-arrow">→</span>
               </a>
               <a href="https://7ports.github.io/project-alexandria/" class="sidebar-link-btn link-docs">
+                <span class="link-icon">&#128218;</span><span class="link-label">Documentation</span><span class="link-arrow">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SAURON -->
+    <div class="project">
+      <div class="project-header">
+        <div class="project-header-left">
+          <div class="project-name-row">
+            <span class="project-name">Project Sauron</span>
+            <span class="project-type type-infra">Observability</span>
+          </div>
+          <div class="project-tagline">One stack to see them all — self-hosted observability on AWS</div>
+          <div class="status-badge"><span class="status-dot dot-active"></span> Active</div>
+        </div>
+        <div class="project-header-right">
+          <div class="header-links">
+            <a href="https://github.com/7ports/project-sauron" class="btn btn-ghost">GitHub</a>
+            <a href="https://7ports.github.io/project-sauron/" class="btn btn-docs">Docs</a>
+          </div>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-grid media-grid-2">
+          <div class="terminal-preview">
+            <div class="terminal-bar">
+              <span class="terminal-dot td-red"></span><span class="terminal-dot td-amber"></span><span class="terminal-dot td-green"></span>
+              <span class="terminal-title">monitoring stack · docker compose</span>
+            </div>
+            <div class="terminal-body">
+              <div><span class="dim">$</span> <span class="green">docker compose</span> ps</div>
+              <div>&nbsp;</div>
+              <div><span class="purple">prometheus</span>          <span class="green">Up 14d</span>  <span class="dim">:9090</span></div>
+              <div><span class="purple">grafana</span>             <span class="green">Up 14d</span>  <span class="dim">:3000</span></div>
+              <div><span class="purple">loki</span>                <span class="green">Up 14d</span>  <span class="dim">:3100</span></div>
+              <div><span class="purple">node-exporter</span>       <span class="green">Up 14d</span>  <span class="dim">:9100</span></div>
+              <div><span class="purple">blackbox-exporter</span>   <span class="green">Up 14d</span>  <span class="dim">:9115</span></div>
+              <div><span class="purple">cloudwatch-exporter</span> <span class="green">Up 14d</span>  <span class="dim">:9106</span></div>
+              <div>&nbsp;</div>
+              <div><span class="dim"># t3.small EC2 · Toronto region · auto-deploys via GitHub Actions</span></div>
+            </div>
+          </div>
+          <div class="terminal-preview">
+            <div class="terminal-bar">
+              <span class="terminal-dot td-red"></span><span class="terminal-dot td-amber"></span><span class="terminal-dot td-green"></span>
+              <span class="terminal-title">prometheus · alert rules</span>
+            </div>
+            <div class="terminal-body">
+              <div><span class="amber">groups:</span></div>
+              <div>  <span class="amber">- name:</span> <span class="green">uptime</span></div>
+              <div>    <span class="amber">rules:</span></div>
+              <div>      <span class="amber">- alert:</span> <span class="green">SiteDown</span></div>
+              <div>        <span class="amber">expr:</span> probe_success == 0</div>
+              <div>        <span class="amber">for:</span> 5m</div>
+              <div>      <span class="amber">- alert:</span> <span class="green">SSLExpiringSoon</span></div>
+              <div>        <span class="amber">expr:</span> probe_ssl_earliest_cert_expiry</div>
+              <div>              - time() &lt; 86400 * 14</div>
+              <div>&nbsp;</div>
+              <div>  <span class="amber">- name:</span> <span class="green">host</span></div>
+              <div>    <span class="amber">rules:</span></div>
+              <div>      <span class="amber">- alert:</span> <span class="green">DiskFillingUp</span></div>
+              <div>        <span class="amber">expr:</span> disk_used_pct &gt; 85</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="project-body">
+        <div>
+          <p class="project-description">
+            Sauron is a single self-hosted observability platform that monitors every other 7ports project from one Grafana instance — web traffic, API health, host metrics, and AWS service stats. The whole stack runs on a <code>t3.small</code> EC2 box via Docker Compose, provisioned by Terraform and auto-deployed from <code>main</code>. No SaaS, no per-seat billing, no data leaves the host.
+          </p>
+          <ul class="feature-list">
+            <li>Full Prometheus + Grafana + Loki stack with Node Exporter, Blackbox Exporter, and CloudWatch Exporter — metrics, logs, and uptime in one place</li>
+            <li>Three pre-built dashboards: Web Traffic &amp; Uptime (frontend + SSL), API &amp; Host Overview (CPU/memory/disk), AWS Overview (EC2/Lambda/S3 via CloudWatch)</li>
+            <li>Infrastructure-as-code: Terraform provisions the EC2 instance, VPC, IAM, and Elastic IP; one <code>terraform apply</code> brings the whole hub up</li>
+            <li>GitHub Actions CI/CD auto-deploys monitoring config and dashboard JSON to the EC2 host on every push to <code>main</code></li>
+            <li>Designed to be extended by Helldiver — drop a project in and the agent team wires it into Sauron automatically</li>
+          </ul>
+        </div>
+        <div class="project-sidebar">
+          <div class="sidebar-section">
+            <div class="sidebar-label">Tech Stack</div>
+            <div class="tech-tags">
+              <span class="tech-tag">Prometheus</span><span class="tech-tag">Grafana</span><span class="tech-tag">Loki</span>
+              <span class="tech-tag">Terraform</span><span class="tech-tag">AWS EC2</span><span class="tech-tag">Docker Compose</span>
+              <span class="tech-tag">CloudWatch</span><span class="tech-tag">GitHub Actions</span>
+            </div>
+          </div>
+          <div class="sidebar-section">
+            <div class="sidebar-label">Links</div>
+            <div class="sidebar-links">
+              <a href="https://github.com/7ports/project-sauron" class="sidebar-link-btn">
+                <span class="link-icon">&#128196;</span><span class="link-label">Source on GitHub</span><span class="link-arrow">→</span>
+              </a>
+              <a href="https://7ports.github.io/project-sauron/" class="sidebar-link-btn link-docs">
+                <span class="link-icon">&#128218;</span><span class="link-label">Documentation</span><span class="link-arrow">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HELLDIVER -->
+    <div class="project">
+      <div class="project-header">
+        <div class="project-header-left">
+          <div class="project-name-row">
+            <span class="project-name">Project Helldiver</span>
+            <span class="project-type type-agents">Agent Team</span>
+          </div>
+          <div class="project-tagline">AI agents that onboard any repo onto Sauron observability</div>
+          <div class="status-badge"><span class="status-dot dot-alpha"></span> Alpha</div>
+        </div>
+        <div class="project-header-right">
+          <div class="header-links">
+            <a href="https://github.com/7ports/project-helldiver" class="btn btn-ghost">GitHub</a>
+            <a href="https://7ports.github.io/project-helldiver/" class="btn btn-docs">Docs</a>
+          </div>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-grid media-grid-2">
+          <div class="terminal-preview">
+            <div class="terminal-bar">
+              <span class="terminal-dot td-red"></span><span class="terminal-dot td-amber"></span><span class="terminal-dot td-green"></span>
+              <span class="terminal-title">helldiver pipeline · 7-agent run</span>
+            </div>
+            <div class="terminal-body">
+              <div><span class="dim">$</span> <span class="green">helldiver onboard</span> 7ports/project-hammer</div>
+              <div>&nbsp;</div>
+              <div><span class="green">●</span> <span class="purple">recon-agent</span>             fingerprinted Node/React app</div>
+              <div><span class="green">●</span> <span class="purple">instrumentation-engineer</span>  picked Alloy + node_exporter</div>
+              <div><span class="green">●</span> <span class="purple">sauron-config-writer</span>     wrote prometheus.yml entry</div>
+              <div><span class="green">●</span> <span class="purple">client-onboarding-agent</span>  wrote client-side config</div>
+              <div><span class="green">●</span> <span class="purple">dashboard-generator</span>      built 4-panel Grafana board</div>
+              <div><span class="green">●</span> <span class="purple">validation-agent</span>         all checks passed</div>
+              <div><span class="green">●</span> <span class="purple">docs-agent</span>               wrote OBSERVABILITY.md</div>
+              <div>&nbsp;</div>
+              <div><span class="dim"># PR opened against project-sauron and project-hammer</span></div>
+            </div>
+          </div>
+          <div class="terminal-preview">
+            <div class="terminal-bar">
+              <span class="terminal-dot td-red"></span><span class="terminal-dot td-amber"></span><span class="terminal-dot td-green"></span>
+              <span class="terminal-title">recon-agent · project fingerprint</span>
+            </div>
+            <div class="terminal-body">
+              <div><span class="amber">{</span></div>
+              <div>  <span class="amber">"runtime"</span>: <span class="green">"node@20"</span>,</div>
+              <div>  <span class="amber">"framework"</span>: <span class="green">"express + react"</span>,</div>
+              <div>  <span class="amber">"deploy_target"</span>: <span class="green">"flyio + cloudfront"</span>,</div>
+              <div>  <span class="amber">"existing_metrics"</span>: <span class="blue">false</span>,</div>
+              <div>  <span class="amber">"existing_logs"</span>: <span class="green">"stdout"</span>,</div>
+              <div>  <span class="amber">"recommended"</span>: [</div>
+              <div>    <span class="green">"prom-client"</span>,</div>
+              <div>    <span class="green">"alloy-logs"</span>,</div>
+              <div>    <span class="green">"blackbox-http"</span></div>
+              <div>  ]</div>
+              <div><span class="amber">}</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="project-body">
+        <div>
+          <p class="project-description">
+            Helldiver is an AI agent team that takes any GitHub repo and wires it into a Sauron observability instance — picking exporters, writing client and hub config, generating Grafana dashboards, and validating everything before opening PRs. It inherits Voltron's agent orchestration: scrum-master coordination, Docker isolation per agent, and post-session reflections that improve the templates over time.
+          </p>
+          <ul class="feature-list">
+            <li>7-agent pipeline: <code>recon-agent</code> fingerprints the project, <code>instrumentation-engineer</code> picks exporters and Alloy components, <code>sauron-config-writer</code> + <code>client-onboarding-agent</code> generate hub and client config in parallel</li>
+            <li><code>dashboard-generator</code> creates Grafana dashboards from the project shape, <code>validation-agent</code> runs config and connectivity checks, <code>docs-agent</code> writes per-project observability docs</li>
+            <li>Inherits Voltron's full Docker + reflection infrastructure — agents run in isolated containers, scrum-master orchestrates, post-session reflections feed template improvements</li>
+            <li>Opens PRs against both repos — adds the target to Sauron's <code>prometheus.yml</code> and adds a client-side config to the project — so onboarding always lands as reviewable change</li>
+          </ul>
+        </div>
+        <div class="project-sidebar">
+          <div class="sidebar-section">
+            <div class="sidebar-label">Tech Stack</div>
+            <div class="tech-tags">
+              <span class="tech-tag">Claude Code</span><span class="tech-tag">MCP</span><span class="tech-tag">Docker</span>
+              <span class="tech-tag">Grafana Alloy</span><span class="tech-tag">Prometheus</span><span class="tech-tag">GitHub CLI</span>
+            </div>
+          </div>
+          <div class="sidebar-section">
+            <div class="sidebar-label">Links</div>
+            <div class="sidebar-links">
+              <a href="https://github.com/7ports/project-helldiver" class="sidebar-link-btn">
+                <span class="link-icon">&#128196;</span><span class="link-label">Source on GitHub</span><span class="link-arrow">→</span>
+              </a>
+              <a href="https://7ports.github.io/project-helldiver/" class="sidebar-link-btn link-docs">
                 <span class="link-icon">&#128218;</span><span class="link-label">Documentation</span><span class="link-arrow">→</span>
               </a>
             </div>
@@ -991,12 +1194,24 @@
         <p class="eco-desc">The two MCP servers are designed to work together. Voltron provides the agent team; Alexandria provides the knowledge base. Every Voltron agent calls <code>quick_setup</code> before installing any tool. After setup, they call <code>update_guide</code>. Tool knowledge flows from sessions into Alexandria for every future project.</p>
       </div>
       <div class="eco-card">
+        <div class="eco-title">Sauron + Helldiver</div>
+        <p class="eco-desc">Sauron is the observability hub; Helldiver is the agent team that wires projects into it. Drop a repo into Helldiver and it fingerprints the project, picks exporters, generates Grafana dashboards, and opens PRs against both Sauron and the target — turning observability onboarding into a one-command operation.</p>
+      </div>
+      <div class="eco-card">
         <div class="eco-title">Voltron in Production</div>
-        <p class="eco-desc">Project Pepper and Project Hammer are both developed using the full Voltron workflow — scrum-master for planning, specialist agents in Docker for implementation, live progress dashboard for visibility. They serve as real-world validation for the agent templates and generate the reflections that feed the self-improvement loop.</p>
+        <p class="eco-desc">Hammer, Pepper, Sauron, and Helldiver are all developed using the full Voltron workflow — scrum-master for planning, specialist agents in Docker for implementation, live progress dashboard for visibility. They serve as real-world validation for the agent templates and generate the reflections that feed the self-improvement loop.</p>
       </div>
       <div class="eco-card">
         <div class="eco-title">Self-Improving Loop</div>
         <p class="eco-desc">Specialist agents submit post-session reflections at phase completion and session end. A GitHub Actions workflow processes them three times a week (Mon/Wed/Fri at 10:00 UTC), applies targeted improvements to agent templates, and opens PRs for human review before anything reaches <code>main</code>.</p>
+      </div>
+      <div class="eco-card">
+        <div class="eco-title">Inheritance, not duplication</div>
+        <p class="eco-desc">Helldiver doesn't reinvent agent orchestration — it inherits Voltron's Docker runtime, scrum-master coordination, reflection pipeline, and Alexandria integration. New agent teams can be built on the same foundation without rebuilding the orchestration layer.</p>
+      </div>
+      <div class="eco-card">
+        <div class="eco-title">Everything monitored by Sauron</div>
+        <p class="eco-desc">All public 7ports projects with a deployed surface — Hammer, Pepper, the docs sites — are watched by a single Sauron instance. Uptime, SSL expiry, response time, and host metrics surface in one Grafana, with alert rules for the failures worth paging on.</p>
       </div>
     </div>
   </div>
@@ -1011,6 +1226,10 @@
     <a href="https://7ports.github.io/project-voltron/">Voltron</a>
     &nbsp;&middot;&nbsp;
     <a href="https://7ports.github.io/project-alexandria/">Alexandria</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://7ports.github.io/project-sauron/">Sauron</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://7ports.github.io/project-helldiver/">Helldiver</a>
   </p>
 </footer>
 
